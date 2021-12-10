@@ -24,10 +24,10 @@ private Button bCorreo, bTelefono;
         bTelefono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String numero_telefono=bTelefono.getText().toString();
-                String url="tel:+34"+numero_telefono;
+                String numero_telefono = bTelefono.getText().toString();
+                String url = "tel:+34" + numero_telefono;
 
-                Intent intent =new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -36,11 +36,9 @@ private Button bCorreo, bTelefono;
         bCorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String txt_gmail=bCorreo.getText().toString();
-                Toast toast = Toast.makeText(getApplicationContext(), ""+txt_gmail, Toast.LENGTH_LONG);
-                toast.show();
-                String url="mailto:"+txt_gmail;
-                Intent intent =new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                String txt_gmail = bCorreo.getText().toString();
+                String url = "mailto:"+txt_gmail;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
