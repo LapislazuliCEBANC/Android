@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-private Button bCorreo, bTelefono;
+private Button bCorreo, bTelefono, bLocalizacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,9 @@ private Button bCorreo, bTelefono;
         //AMD
         bCorreo = (Button) findViewById(R.id.ButtonCorreo);
         bTelefono = (Button) findViewById(R.id.ButtonTelefono);
+        bLocalizacion = (Button) findViewById(R.id.buttonUbicacion);
 
+        //Llamada telefono
         bTelefono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +42,15 @@ private Button bCorreo, bTelefono;
                 String url = "mailto:"+txt_gmail;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
+            }
+        });
+
+        //Listener ubicacion
+
+        bLocalizacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
