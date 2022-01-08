@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-private Button bCorreo, bTelefono, bLocalizacion;
+private Button bCorreo, bTelefono, bLocalizacion, bNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ private Button bCorreo, bTelefono, bLocalizacion;
         bCorreo = (Button) findViewById(R.id.ButtonCorreo);
         bTelefono = (Button) findViewById(R.id.ButtonTelefono);
         bLocalizacion = (Button) findViewById(R.id.buttonUbicacion);
+        bNext = (Button) findViewById(R.id.buttonNext);
 
         //Llamada telefono
         bTelefono.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +51,16 @@ private Button bCorreo, bTelefono, bLocalizacion;
         bLocalizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        bNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
             }
         });
     }
