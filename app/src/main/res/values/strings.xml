@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Reto</string>
+    <string name="btnCrear">Crear</string>
+    <string name="Apellido1">Primer Apellido</string>
+    <string name="Apellido2">Segundo Apellido</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Direccion">Direccion</string>
+    <string name="Poblacion">Poblacion</string>
+    <string name="Provincia">Provincia</string>
+    <string name="Formpago">Forma de Pago</string>
+    <string name="Telefono">Telefono</string>
+    <string name="btnCancelar">Cancelar</string>
     <string name="title_activity_maps">MapsActivity</string>
 </resources>
