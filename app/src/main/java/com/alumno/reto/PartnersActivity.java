@@ -60,9 +60,18 @@ public class PartnersActivity extends AppCompatActivity {
                         Partner partner = new Partner();
                         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                             Intent data = result.getData();
-                            //TODO: Añadir los codigos de vuelta
+                            partner.setApellido1(data.getStringExtra("Apellido1"));
+                            partner.setApellido2(data.getStringExtra("Apellido2"));
+                            partner.setNombre(data.getStringExtra("Nombre"));
+                            partner.setDireccion(data.getStringExtra("Direccion"));
+                            partner.setPoblacion(data.getStringExtra("Poblacion"));
+                            partner.setProvincia(data.getStringExtra("Provincia"));
+                            partner.setFormpago(data.getStringExtra("FormPago"));
+                            partner.setTelefono(data.getStringExtra("Telefono"));
+
                             datos.add(partner);
                         }
+                        cargar();
                     }
                 }
         );
@@ -71,7 +80,7 @@ public class PartnersActivity extends AppCompatActivity {
             directorio.mkdir();
         }
         if(ficheroXML.exists()){
-            //TODO: cargar();
+            cargar();
         }else{
             try {
                 ficheroXML.createNewFile();
@@ -90,6 +99,13 @@ public class PartnersActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        escribir();
+    }
+
+    //Lee el partner entero y lo agrega al arraylist y carga el listview
     protected void cargar(){
         Partner partner;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -103,8 +119,16 @@ public class PartnersActivity extends AppCompatActivity {
                 partner = new Partner();
                 Node pers = personas.item(i);
                 if (pers.getNodeType() == Node.ELEMENT_NODE){
+                    //Lee el parter entero
                     Element elemento = (Element) pers;
-                    //TODO: crear el partner
+                    partner.setApellido1(elemento.getElementsByTagName("Apellido1").item(0).getTextContent());
+                    partner.setApellido2(elemento.getElementsByTagName("Apellido2").item(0).getTextContent());
+                    partner.setNombre(elemento.getElementsByTagName("Nombre").item(0).getTextContent());
+                    partner.setDireccion(elemento.getElementsByTagName("Direccion").item(0).getTextContent());
+                    partner.setPoblacion(elemento.getElementsByTagName("Poblacion").item(0).getTextContent());
+                    partner.setProvincia(elemento.getElementsByTagName("Provincia").item(0).getTextContent());
+                    partner.setFormpago(elemento.getElementsByTagName("FormPago").item(0).getTextContent());
+                    partner.setTelefono(elemento.getElementsByTagName("Telefono").item(0).getTextContent());
                     datos.add(partner);
                 }
             }
@@ -133,7 +157,7 @@ public class PartnersActivity extends AppCompatActivity {
             nombre.setText(datos.get(position).getNombre());
 
             TextView apellido1 = item.findViewById(R.id.txvPartnerApellido1);
-            apellido1.setText(datos.get(position).getAppellido1());
+            apellido1.setText(datos.get(position).getApellido1());
 
             TextView apellido2 = item.findViewById(R.id.txvPartnerApellido2);
             apellido2.setText(datos.get(position).getApellido2());
@@ -156,14 +180,23 @@ public class PartnersActivity extends AppCompatActivity {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
-            Document document = implementation.createDocument(null, "Personas", null);
+            Document document = implementation.createDocument(null, "Partners", null);
             document.setXmlVersion("1.0");
             Partner partner;
             for (int i = 0; i < datos.size(); i++) {
                 partner = datos.get(i);
-                Element raiz = document.createElement("Persona");
+                Element raiz = document.createElement("Partner");
                 document.getDocumentElement().appendChild(raiz);
-                //TODO: Cosas con lo de crear elemento
+
+                crearElemento("Apellido1", partner.getApellido1(), raiz, document);
+                crearElemento("Apelido2", partner.getApellido2(),raiz, document );
+                crearElemento("Nombre", partner.getNombre(), raiz, document);
+                crearElemento("Direccion", partner.getDireccion() ,raiz, document);
+                crearElemento("Poblacion", partner.getPoblacion(), raiz, document);
+                crearElemento("Provincia", partner.getProvincia(), raiz, document);
+                crearElemento("FormPago", partner.getFormpago(), raiz, document);
+                crearElemento("Telefono", partner.getTelefono(), raiz, document);
+
             }
             Source source = new DOMSource(document);
             Result result = new StreamResult();

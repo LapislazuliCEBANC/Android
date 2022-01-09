@@ -25,11 +25,11 @@ public class Partner {
         this.telefono = telefono;
     }
 
-    public String getAppellido1() {
+    public String getApellido1() {
         return appellido1;
     }
 
-    public void setAppellido1(String appellido1) {
+    public void setApellido1(String appellido1) {
         this.appellido1 = appellido1;
     }
 
