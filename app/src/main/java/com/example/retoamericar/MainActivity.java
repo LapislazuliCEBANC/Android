@@ -14,7 +14,9 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView llamada, correo, localizacion, acercaDe, siguiente;
+    CardView llamada, correo, localizacion, acercaDe;
+    CardView agenda, partner, pedido, envio;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         correo = (CardView) findViewById(R.id.bGmail);
         localizacion = (CardView) findViewById(R.id.bUbicacion);
         acercaDe = (CardView) findViewById(R.id.bAcercaDe);
-        siguiente = (CardView) findViewById(R.id.bSiguiente);
 
         //Llamada telefono
         llamada.setOnClickListener(new View.OnClickListener() {
@@ -70,23 +71,42 @@ public class MainActivity extends AppCompatActivity {
                 dialogo.show(fragmentManager, "tagAlerta");
             }
         });
+        agenda = (CardView) findViewById(R.id.bAgenda);
+        partner = (CardView) findViewById(R.id.bPartners);
+        pedido = (CardView) findViewById(R.id.bPedidos);
+        envio = (CardView) findViewById(R.id.bMandar);
 
-        //Listener siguiente
 
-        siguiente.setOnClickListener(new View.OnClickListener() {
+        agenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
 
+        partner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PartnersActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        pedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
-
+        envio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
-
-
-
 }

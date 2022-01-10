@@ -7,6 +7,8 @@
     <string name="dialogo_linea3">Direccion : </string>
     <string name="dialogo_linea2">Lucas, Ramon, Ander, Maialen</string>
     <string name="dialogo_linea4">Creadores : </string>
+
+    //partners
     <string name="btnCrear">Crear</string>
     <string name="Apellido1">Primer Apellido</string>
     <string name="Apellido2">Segundo Apellido</string>
@@ -20,4 +22,13 @@
     <string name="btnNuevo">Nuevo</string>
     <string name="btnFinalizar">Finalizar</string>
     <string name="btnBorrar">Borrar</string>
+    // botones
+
+    <string name="agenda">CALENDARIO DE CITAS</string>
+    <string name="partner">GESTIÓN DE PARTNERS</string>
+    <string name="mandar">ENVIO A DELEGACIONES</string>
+    <string name="pedidos">GESTIÓN DE PEDIDOS</string>
+
+
+
 </resources>
