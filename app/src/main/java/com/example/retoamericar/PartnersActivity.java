@@ -44,7 +44,7 @@ public class PartnersActivity extends AppCompatActivity {
     Button crear;
     ActivityResultLauncher<Intent> activityResultLauncher;
     ArrayList<Partner> datos = new ArrayList<>();
-    File directorio = new File("/data/data/com.example.retoamericar/files");
+    File directorio = new File("/data/data/com.example.lapislazulireto/files");
     File ficheroXML = new File(directorio,"partners.xml");
 
     @Override
@@ -69,10 +69,8 @@ public class PartnersActivity extends AppCompatActivity {
                             partner.setProvincia(data.getStringExtra("Provincia"));
                             partner.setFormpago(data.getStringExtra("FormPago"));
                             partner.setTelefono(data.getStringExtra("Telefono"));
-
                             datos.add(partner);
                         }
-                        cargar();
                     }
                 }
         );
@@ -115,10 +113,10 @@ public class PartnersActivity extends AppCompatActivity {
             Document document = builder.parse(ficheroXML);
             document.getDocumentElement().normalize();
 
-            NodeList personas = document.getElementsByTagName("Persona");
-            for (int i = 0; i < personas.getLength(); i++) {
+            NodeList partners = document.getElementsByTagName("Partner");
+            for (int i = 0; i < partners.getLength(); i++) {
                 partner = new Partner();
-                Node pers = personas.item(i);
+                Node pers = partners.item(i);
                 if (pers.getNodeType() == Node.ELEMENT_NODE){
                     //Lee el parter entero
                     Element elemento = (Element) pers;
@@ -190,7 +188,7 @@ public class PartnersActivity extends AppCompatActivity {
                 document.getDocumentElement().appendChild(raiz);
 
                 crearElemento("Apellido1", partner.getApellido1(), raiz, document);
-                crearElemento("Apelido2", partner.getApellido2(),raiz, document );
+                crearElemento("Apellido2", partner.getApellido2(),raiz, document );
                 crearElemento("Nombre", partner.getNombre(), raiz, document);
                 crearElemento("Direccion", partner.getDireccion() ,raiz, document);
                 crearElemento("Poblacion", partner.getPoblacion(), raiz, document);
@@ -200,11 +198,11 @@ public class PartnersActivity extends AppCompatActivity {
 
             }
             Source source = new DOMSource(document);
-            Result result = new StreamResult();
+            Result result = new StreamResult(ficheroXML);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
         }catch (Exception e){
-
+            Log.e("Error", "Causa: "+e);
         }
     }
 
