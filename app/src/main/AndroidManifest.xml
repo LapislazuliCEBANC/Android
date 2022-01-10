@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetoAmericar">
         <activity
+            android:name=".NuevaLineaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AlbaranActivity"
+            android:exported="false" />
+        <activity
             android:name=".DialogoPersonalizado"
             android:exported="true"
             tools:ignore="Instantiatable" />
@@ -54,10 +60,10 @@
         </activity>
         <activity
             android:name=".PartnersActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".NuevoPartnerActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

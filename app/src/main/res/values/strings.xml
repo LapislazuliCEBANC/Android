@@ -17,4 +17,7 @@
     <string name="Formpago">Forma de Pago</string>
     <string name="Telefono">Telefono</string>
     <string name="btnCancelar">Cancelar</string>
+    <string name="btnNuevo">Nuevo</string>
+    <string name="btnFinalizar">Finalizar</string>
+    <string name="btnBorrar">Borrar</string>
 </resources>
