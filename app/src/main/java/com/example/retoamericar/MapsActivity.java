@@ -1,10 +1,11 @@
-package com.alumno.reto;
+package com.example.retoamericar;
 
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
-import com.alumno.reto.databinding.ActivityMapsBinding;
+
+import com.example.retoamericar.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

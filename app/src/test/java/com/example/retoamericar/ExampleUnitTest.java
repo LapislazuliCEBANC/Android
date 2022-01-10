@@ -1,4 +1,4 @@
-package com.alumno.reto;
+package com.example.retoamericar;
 
 import org.junit.Test;
 

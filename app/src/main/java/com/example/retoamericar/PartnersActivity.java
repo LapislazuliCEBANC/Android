@@ -1,4 +1,5 @@
-package com.alumno.reto;
+package com.example.retoamericar;
+
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -43,7 +44,7 @@ public class PartnersActivity extends AppCompatActivity {
     Button crear;
     ActivityResultLauncher<Intent> activityResultLauncher;
     ArrayList<Partner> datos = new ArrayList<>();
-    File directorio = new File("/data/data/com.alumno.reto/files");
+    File directorio = new File("/data/data/com.example.retoamericar/files");
     File ficheroXML = new File(directorio,"partners.xml");
 
     @Override

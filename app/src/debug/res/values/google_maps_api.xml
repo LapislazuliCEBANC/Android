@@ -4,12 +4,12 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=6F:44:86:DC:AA:FC:B6:7D:89:D3:AD:85:E6:DD:7E:B4:8B:C3:D9:78%3Bcom.alumno.reto
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=6F:44:86:DC:AA:FC:B6:7D:89:D3:AD:85:E6:DD:7E:B4:8B:C3:D9:78%3Bcom.example.retoamericar
 
     You can also add your credentials to an existing key, using these values:
 
     Package name:
-    com.alumno.reto
+    com.example.retoamericar
 
     SHA-1 certificate fingerprint:
     6F:44:86:DC:AA:FC:B6:7D:89:D3:AD:85:E6:DD:7E:B4:8B:C3:D9:78
@@ -20,5 +20,5 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBSs6ePOlK_6KjsV_mxBY9_3vvU4CDmpOs</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAj0xaCH1Bfdd-AAgXJud_celRkY-5fkvI</string>
 </resources>

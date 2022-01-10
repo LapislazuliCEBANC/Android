@@ -1,4 +1,5 @@
-package com.alumno.reto;
+package com.example.retoamericar;
+
 
 public class Partner {
     String appellido1;

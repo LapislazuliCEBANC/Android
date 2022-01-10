@@ -1,2 +1,0 @@
-# AndroidLapislazuli
-Reto
