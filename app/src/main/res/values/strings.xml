@@ -29,6 +29,8 @@
     <string name="mandar">ENVIO A DELEGACIONES</string>
     <string name="pedidos">GESTIÓN DE PEDIDOS</string>
 
-
+    //calendario
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
 
 </resources>
