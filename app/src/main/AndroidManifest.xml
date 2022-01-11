@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetoAmericar">
         <activity
+            android:name=".CalendarioActivity"
+            android:exported="true" />
+        <activity
             android:name=".NuevaLineaActivity"
             android:exported="false" />
         <activity
