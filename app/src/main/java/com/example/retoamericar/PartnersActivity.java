@@ -44,7 +44,7 @@ public class PartnersActivity extends AppCompatActivity {
     Button crear;
     ActivityResultLauncher<Intent> activityResultLauncher;
     ArrayList<Partner> datos = new ArrayList<>();
-    File directorio = new File("/data/data/com.example.lapislazulireto/files");
+    File directorio = new File("/data/data/com.example.lapislazulireto");
     File ficheroXML = new File(directorio,"partners.xml");
 
     @Override

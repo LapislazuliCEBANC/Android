@@ -1,6 +1,7 @@
 package com.example.retoamericar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +20,8 @@ public class NuevoPartnerActivity extends AppCompatActivity {
     EditText provincia;
     EditText formPago;
     EditText telefono;
-    Button crear;
-    Button cancelar;
+    CardView crear;
+    CardView cancelar;
     Intent intent = new Intent();
 
     @Override

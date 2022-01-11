@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical"
     tools:context=".NuevoPartnerActivity">
 
@@ -11,14 +14,21 @@
         android:id="@+id/edtPartnerApellido1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Apellido1"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtPartnerApellido2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Apellido2"
         android:inputType="textPersonName"
@@ -28,6 +38,9 @@
         android:id="@+id/edtPartnerNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Nombre"
         android:inputType="textPersonName"
@@ -37,6 +50,9 @@
         android:id="@+id/edtPartnerDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Direccion"
         android:inputType="textPersonName"
@@ -46,6 +62,9 @@
         android:id="@+id/edtPartnerPoblacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Poblacion"
         android:inputType="textPersonName"
@@ -55,6 +74,9 @@
         android:id="@+id/edtPartnerProvincia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Provincia"
         android:inputType="textPersonName"
@@ -64,6 +86,9 @@
         android:id="@+id/edtPartnerFrompago"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Formpago"
         android:inputType="textPersonName"
@@ -73,39 +98,91 @@
         android:id="@+id/edtPartnerTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="@string/Telefono"
         android:inputType="phone"
         android:minHeight="48dp" />
 
-    <LinearLayout
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/layoutArriba"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:columnCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399"
+        app:rowCount="1">
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnPartnersCrear"
-            android:layout_width="113dp"
-            android:layout_height="wrap_content"
-            android:text="@string/btnCrear" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/azulAmerica"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
 
-        <LinearLayout
-            android:layout_width="104dp"
-            android:layout_height="29dp"
-            android:orientation="horizontal"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
 
-        <Button
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/btnCrear"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnPartnerCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btnCancelar" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/azulAmerica"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
 
-        <LinearLayout
-            android:layout_width="74dp"
-            android:layout_height="25dp"
-            android:orientation="horizontal"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/btnCancelar"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"  />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.gridlayout.widget.GridLayout>
 
 </LinearLayout>
