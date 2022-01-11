@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         envio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(MainActivity.this, Gmail_attachment.class);
                 startActivity(intent);
             }
         });
