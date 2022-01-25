@@ -11,29 +11,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
-        android:text="@string/Nombre"
+        android:text="Nombre"
         android:textSize="20sp" />
-
-    <LinearLayout
-        android:layout_width="389dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txvPartnerApellido1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:paddingRight="4dp"
-            android:text="@string/Apellido1" />
-
-        <TextView
-            android:id="@+id/txvPartnerApellido2"
-            android:layout_width="264dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="25dp"
-            android:text="@string/Apellido2" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/txvPartnerDireccion"
@@ -41,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="25dp"
-        android:text="@string/Direccion" />
+        android:text="Direccion" />
 
     <TextView
         android:id="@+id/txvPartnerPoblacion"
@@ -49,7 +28,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="25dp"
-        android:text="@string/Poblacion" />
+        android:text="Poblacion" />
+
+    <TextView
+        android:id="@+id/txvPartnerCIF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="25dp"
+        android:text="CIF" />
+
+    <TextView
+        android:id="@+id/txvPartnerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="25dp"
+        android:text="Email" />
 
     <TextView
         android:id="@+id/txvPartnerTelefono"
@@ -58,5 +53,5 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/Telefono" />
+        android:text="Telefono" />
 </LinearLayout>

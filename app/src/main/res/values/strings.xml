@@ -29,7 +29,8 @@
     <string name="mandar">ENVIO A DELEGACIONES</string>
     <string name="pedidos">GESTIÓN DE PEDIDOS</string>
     <string name="Hora">Hora</string>
-
+    <string name="cif">CIF</string>
+    <string name="email">E-mail</string>
 
 
 </resources>

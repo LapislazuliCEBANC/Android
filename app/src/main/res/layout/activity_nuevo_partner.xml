@@ -11,31 +11,7 @@
     tools:context=".NuevoPartnerActivity">
 
     <EditText
-        android:id="@+id/edtPartnerApellido1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:hint="@string/Apellido1"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/edtPartnerApellido2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:hint="@string/Apellido2"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/edtPartnerNombre"
+        android:id="@+id/edtNuevoPartnerNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -47,7 +23,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edtPartnerDireccion"
+        android:id="@+id/edtNuevoPartnerDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -59,7 +35,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edtPartnerPoblacion"
+        android:id="@+id/edtNuevoPartnerPoblacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -71,40 +47,40 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edtPartnerProvincia"
+        android:id="@+id/edtNuevoPartnerCif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:ems="10"
-        android:hint="@string/Provincia"
+        android:hint="@string/cif"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edtPartnerFrompago"
+        android:id="@+id/edtNuevoPartnerTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
-        android:ems="10"
-        android:hint="@string/Formpago"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/edtPartnerTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="@string/Telefono"
-        android:inputType="phone"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edtNuevoPartnerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp" />
 
     <androidx.gridlayout.widget.GridLayout
@@ -124,7 +100,7 @@
         app:rowCount="1">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnPartnersCrear"
+            android:id="@+id/btnNuevoPartnerCrear"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="5dp"
@@ -153,7 +129,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnPartnerCancelar"
+            android:id="@+id/btnNuevoPartnerCancelar"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="5dp"

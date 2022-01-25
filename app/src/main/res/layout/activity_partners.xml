@@ -7,7 +7,7 @@
     tools:context=".PartnersActivity">
 
     <ListView
-        android:id="@+id/lsvPartners"
+        android:id="@+id/lsvPartnersLista"
         android:layout_width="416dp"
         android:layout_height="521dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.104" />
 
     <Button
-        android:id="@+id/btnCrear"
+        android:id="@+id/btnPartnersCrear"
         android:layout_width="311dp"
         android:layout_height="53dp"
         android:layout_marginTop="64dp"
@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lsvPartners"
+        app:layout_constraintTop_toBottomOf="@+id/lsvPartnersLista"
         app:layout_constraintVertical_bias="0.0"
         android:textColor="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

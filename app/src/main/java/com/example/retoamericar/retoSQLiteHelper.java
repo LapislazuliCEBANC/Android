@@ -87,7 +87,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(crearArticulos);
         sqLiteDatabase.execSQL(crearLineas);
 
-        sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre) VALUES ('Prueba')");
+        sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Prueba','prueba','prueba')");
     }
 
     @Override
