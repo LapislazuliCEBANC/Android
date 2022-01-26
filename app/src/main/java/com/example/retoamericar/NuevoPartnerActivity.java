@@ -52,11 +52,13 @@ public class NuevoPartnerActivity extends AppCompatActivity {
                 }else{
                     p3 = true;
                 }
+                //TODO: Comprobar 8 numeros y una letra nada mas porque no me apetece estar generando mierdas
                 if(cif.getText().length() == 0){
                     cif.setError("El campo debe completarse");
                 }else{
                     p4 = true;
                 }
+                //TODO: COmprobar que son nueve numeros
                 if(telefono.getText().length() == 0){
                     telefono.setError("El campo debe completarse");
                 }else{

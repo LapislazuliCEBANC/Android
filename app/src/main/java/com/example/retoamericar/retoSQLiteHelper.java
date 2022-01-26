@@ -88,6 +88,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(crearLineas);
 
         sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Prueba','prueba','prueba')");
+        //TODO: Meter los datos por defecto de articulos y comerciales
     }
 
     @Override
