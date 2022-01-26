@@ -33,8 +33,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: comprobar lso campos
                 String[] args = new String[]{usuario.getText().toString(), contrasena.getText().toString()};
-                Cursor c = db.rawQuery("SELECT usuario, contrasena FROM Comerciales WHERE usuario=? AND contrasena=?",args);
+                Cursor c = db.rawQuery("SELECT usuario, contrasena, idComercial FROM Comerciales WHERE usuario=? AND contrasena=?",args);
                 if (c.moveToFirst()){
+                    ponerGD(c.getInt(2));
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
                 }
@@ -46,5 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         contrasena.setText("");
+    }
+
+    private void ponerGD(int id){
+        ((GlobalData) this.getApplication()).setIdComercial(id);
     }
 }

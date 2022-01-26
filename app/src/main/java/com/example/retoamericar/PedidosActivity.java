@@ -1,43 +1,23 @@
 package com.example.retoamericar;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class PartnersActivity extends AppCompatActivity {
-    ListView lst;
-    Button crear;
-
+public class PedidosActivity extends AppCompatActivity {
+    Spinner spin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partners);
+        setContentView(R.layout.activity_pedidos);
 
         cargar();
 
-        crear = findViewById(R.id.btnPartnersCrear);
-        crear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(PartnersActivity.this, NuevoPartnerActivity.class);
-                startActivity(i);
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        cargar();
     }
 
     private void cargar(){
@@ -60,10 +40,10 @@ public class PartnersActivity extends AppCompatActivity {
                     R.id.txvPartnerTelefono,
                     R.id.txvPartnerEmail
             }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-            lst = findViewById(R.id.lsvPartnersLista);
-            lst.setAdapter(sca);
+            spin = findViewById(R.id.spnPedidosSpinner);
+            sca.setDropDownViewResource(R.layout.partner_pedidos);
+            spin.setAdapter(sca);
         }
         db.close();
     }
-
 }
