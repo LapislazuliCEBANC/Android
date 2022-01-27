@@ -1,6 +1,7 @@
 package com.example.retoamericar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ public class PedidosActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -88,13 +90,14 @@ public class PedidosActivity extends AppCompatActivity {
 
             Cursor c = db.query("Albaranes", campos, "idPartner=?", args, null, null, null);
             if (c.moveToFirst()){
-
-                lista.setLayoutManager(new LinearLayoutManager(this));
+                lista.setVisibility(View.VISIBLE);
+                lista.setLayoutManager(new GridLayoutManager(this,4));
 
                 RecyclerViewAdapter rva = new RecyclerViewAdapter(c);
                 rva.notifyDataSetChanged();
                 lista.setAdapter(rva);
-                //https://stackoverflow.com/questions/50424829/implementation-of-recyclerview-with-cursor-adapter
+            }else{
+                lista.setVisibility(View.INVISIBLE);
             }
         }
         db.close();

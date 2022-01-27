@@ -1,6 +1,8 @@
 package com.example.retoamericar;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +19,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.c = c;
     }
 
-    public class MiViewHolder extends RecyclerView.ViewHolder {
+    public class MiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView idAlbaran;
         TextView fechaAlbaran;
         TextView fechaEnvio;
         TextView fechapago;
         public MiViewHolder(@NonNull View itemView) {
             super(itemView);
+            //TODO: COSAS
             idAlbaran = itemView.findViewById(R.id.txvAlbaranId);
             fechaAlbaran = itemView.findViewById(R.id.txvAlbaranFechaAlbaran);
             fechaEnvio = itemView.findViewById(R.id.txvAlbaranFechaEnvio);
             fechapago = itemView.findViewById(R.id.txvAlbaranFechaPago);
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.e("Prueba","Pta");
+            Intent intent = new Intent (view.getContext(), NuevoPedidoActivity.class);
+            view.getContext().startActivity(intent);
+
         }
     }
 
