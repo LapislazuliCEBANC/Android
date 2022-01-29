@@ -22,6 +22,7 @@ public class PartnersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partners);
 
+        lst = findViewById(R.id.lsvPartnersLista);
         cargar();
 
         crear = findViewById(R.id.btnPartnersCrear);
@@ -44,23 +45,18 @@ public class PartnersActivity extends AppCompatActivity {
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getReadableDatabase();
 
-        String id = String.valueOf((((GlobalData) this.getApplication()).getIdComercial()));
-
+        String id = String.valueOf(((GlobalData) this.getApplication()).getIdComercial());
+        //Select campos, "as _id" obligatorio para el SCA
         String[] campos = new String[]{"idPartner as _id","nombre","direccion","poblacion","cif","telefono","email"};
+        //Where campos
         String[] args = new String[]{id};
 
         Cursor c = db.query("Partners", campos, "idComercial=?", args, null, null, null);
         if (c.moveToFirst()){
-            SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.partner,c,new String[]{"_id","nombre","direccion","poblacion","cif","telefono","email"},new int[]{
-                    R.id.txvPartnerID,
-                    R.id.txvPartnerNombre,
-                    R.id.txvPartnerDireccion,
-                    R.id.txvPartnerPoblacion,
-                    R.id.txvPartnerCIF,
-                    R.id.txvPartnerTelefono,
-                    R.id.txvPartnerEmail
-            }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-            lst = findViewById(R.id.lsvPartnersLista);
+            SimpleCursorAdapter sca = new SimpleCursorAdapter(this, R.layout.partner, c,
+                    new String[]{"_id","nombre","direccion","poblacion","cif","telefono","email"},
+                    new int[]{R.id.txvPartnerID, R.id.txvPartnerNombre, R.id.txvPartnerDireccion, R.id.txvPartnerPoblacion, R.id.txvPartnerCIF, R.id.txvPartnerTelefono, R.id.txvPartnerEmail},
+                    CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             lst.setAdapter(sca);
         }
         db.close();

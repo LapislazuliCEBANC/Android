@@ -26,6 +26,7 @@ public class PedidosActivity extends AppCompatActivity {
     RecyclerView lista;
     Button crear;
     int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class PedidosActivity extends AppCompatActivity {
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //TODO:Cambiar la asignacion del id porque no adminte borrados de partner
                 pos = i;
                 cargarRecyclerView();
 
@@ -79,14 +81,10 @@ public class PedidosActivity extends AppCompatActivity {
 
         Cursor c = db.query("Partners", campos, "idComercial=?", args, null, null, null);
         if (c.moveToFirst()){
-            SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.partner,c,new String[]{"_id","nombre","direccion","poblacion","cif","telefono","email"},new int[]{
-                    R.id.txvPartnerID,
-                    R.id.txvPartnerNombre,
-                    R.id.txvPartnerDireccion,
-                    R.id.txvPartnerPoblacion,
-                    R.id.txvPartnerCIF,
-                    R.id.txvPartnerTelefono,
-                    R.id.txvPartnerEmail
+            //Funciona por el poder del coco del TeamFortress2
+            SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.partner,c,
+                    new String[]{"_id","nombre","direccion","poblacion","cif","telefono","email"},
+                    new int[]{R.id.txvPartnerID, R.id.txvPartnerNombre, R.id.txvPartnerDireccion, R.id.txvPartnerPoblacion, R.id.txvPartnerCIF, R.id.txvPartnerTelefono, R.id.txvPartnerEmail
             }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             sca.setDropDownViewResource(R.layout.partner_pedidos);
             spin.setAdapter(sca);
@@ -127,18 +125,21 @@ public class PedidosActivity extends AppCompatActivity {
         int result = 1;
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getWritableDatabase();
-        String idc = String.valueOf((((GlobalData) this.getApplication()).getIdComercial()));
+        String idc = String.valueOf(((GlobalData) this.getApplication()).getIdComercial());
 
         String[] camposPartner = new String[]{"idPartner"};
         String[] argsPartner = new String[]{idc};
 
         Cursor partners = db.query("Partners", camposPartner, "idComercial=?", argsPartner, null, null, null);
         if (partners.moveToPosition(pos)){
+
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "yyyy-MM-dd", Locale.getDefault());
             Date date = new Date();
+
             ContentValues nuevo = new ContentValues();
             nuevo.put("fechaAlbaran", dateFormat.format(date));
+            //TODO:Cambiar la asignacion del id porque no adminte borrados de partner
             nuevo.put("idPartner", pos+1);
             db.insert("Albaranes", null, nuevo);
             Cursor c = db.rawQuery("SELECT MAX(idAlbaran) FROM Albaranes",null,null);

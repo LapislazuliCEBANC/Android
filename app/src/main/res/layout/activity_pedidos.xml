@@ -18,7 +18,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvPedidosLista"
         android:layout_width="match_parent"
-        android:layout_height="462dp" />
+        android:layout_height="380dp" />
 
     <Button
         android:id="@+id/btnPedidosCrear"

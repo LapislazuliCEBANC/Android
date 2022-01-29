@@ -58,7 +58,7 @@ public class NuevoPartnerActivity extends AppCompatActivity {
                 }else{
                     p4 = true;
                 }
-                //TODO: COmprobar que son nueve numeros
+                //TODO: Comprobar que son nueve numeros
                 if(telefono.getText().length() == 0){
                     telefono.setError("El campo debe completarse");
                 }else{
@@ -86,9 +86,10 @@ public class NuevoPartnerActivity extends AppCompatActivity {
 
     private void escribir(){
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-        SQLiteDatabase db = rsdb.getReadableDatabase();
+        SQLiteDatabase db = rsdb.getWritableDatabase();
 
         ContentValues nuevo = new ContentValues();
+        //idPartner es AutoIncremental: NO PONER
         nuevo.put("idComercial", ((GlobalData)this.getApplicationContext()).getIdComercial());
         nuevo.put("nombre",nombre.getText().toString());
         nuevo.put("direccion",direccion.getText().toString());

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MiViewHolder> {
 
     private Cursor c;
-    String id;
     public RecyclerViewAdapter(Cursor c) {
         this.c = c;
     }
@@ -26,7 +25,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView fechapago;
         public MiViewHolder(@NonNull View itemView) {
             super(itemView);
-            //TODO: COSAS
             idAlbaran = itemView.findViewById(R.id.txvAlbaranId);
             fechaAlbaran = itemView.findViewById(R.id.txvAlbaranFechaAlbaran);
             fechaEnvio = itemView.findViewById(R.id.txvAlbaranFechaEnvio);
