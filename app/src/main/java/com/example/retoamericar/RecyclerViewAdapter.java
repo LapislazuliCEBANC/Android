@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MiViewHolder> {
 
     private Cursor c;
-
+    String id;
     public RecyclerViewAdapter(Cursor c) {
         this.c = c;
     }
@@ -37,10 +37,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View view) {
-            Log.e("Prueba","Pta");
             Intent intent = new Intent (view.getContext(), NuevoPedidoActivity.class);
+            intent.putExtra("id", idAlbaran.getText());
             view.getContext().startActivity(intent);
-
         }
     }
 
