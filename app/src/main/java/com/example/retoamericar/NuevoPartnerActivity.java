@@ -167,7 +167,6 @@ public class NuevoPartnerActivity extends AppCompatActivity {
         db.insert("Partners", null, nuevo);
     }
 
-    //TODO: Injección De Veneno
     //Validaciones
     public boolean validarDNIsinLetra(String dni){
         boolean valido=false;
@@ -196,6 +195,19 @@ public class NuevoPartnerActivity extends AppCompatActivity {
         return valido;
     }
 
+    private static boolean isNumeric(String cadena){
+        boolean valido = false;
+
+        try {
+            Integer.parseInt(cadena);
+            valido = true;
+        } catch (NumberFormatException nfe){
+            valido = false;
+        }
+
+        return valido;
+    }
+
     //Método completo con verificación de letra
     public static boolean validarDNI(String dni){
         boolean valido=false;
@@ -209,19 +221,6 @@ public class NuevoPartnerActivity extends AppCompatActivity {
             valido = false;
         }else{
             valido = true;
-        }
-
-        return valido;
-    }
-
-    private static boolean isNumeric(String cadena){
-        boolean valido = false;
-
-        try {
-            Integer.parseInt(cadena);
-            valido = true;
-        } catch (NumberFormatException nfe){
-            valido = false;
         }
 
         return valido;

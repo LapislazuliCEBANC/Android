@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Listener Gmail
+        //Correo empresa
         correo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Listener ubicacion
-
+        //Ubicacion
         localizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Listener acerca de
-
+        //Acerca de AmeriCar
         acercaDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
