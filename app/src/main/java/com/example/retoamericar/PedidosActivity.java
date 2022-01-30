@@ -2,7 +2,6 @@ package com.example.retoamericar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
@@ -18,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -26,6 +26,7 @@ public class PedidosActivity extends AppCompatActivity {
     RecyclerView lista;
     Button crear;
     int pos;
+    ArrayList<Integer> identificadores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class PedidosActivity extends AppCompatActivity {
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO:Cambiar la asignacion del id porque no adminte borrados de partner
                 pos = i;
                 cargarRecyclerView();
 
@@ -81,13 +81,16 @@ public class PedidosActivity extends AppCompatActivity {
 
         Cursor c = db.query("Partners", campos, "idComercial=?", args, null, null, null);
         if (c.moveToFirst()){
-            //Funciona por el poder del coco del TeamFortress2
+
             SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.partner,c,
                     new String[]{"_id","nombre","direccion","poblacion","cif","telefono","email"},
                     new int[]{R.id.txvPartnerID, R.id.txvPartnerNombre, R.id.txvPartnerDireccion, R.id.txvPartnerPoblacion, R.id.txvPartnerCIF, R.id.txvPartnerTelefono, R.id.txvPartnerEmail
             }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             sca.setDropDownViewResource(R.layout.partner_pedidos);
             spin.setAdapter(sca);
+            do{
+                identificadores.add(c.getInt(0));
+            }while (c.moveToNext());
         }
         db.close();
     }
@@ -139,8 +142,7 @@ public class PedidosActivity extends AppCompatActivity {
 
             ContentValues nuevo = new ContentValues();
             nuevo.put("fechaAlbaran", dateFormat.format(date));
-            //TODO:Cambiar la asignacion del id porque no adminte borrados de partner
-            nuevo.put("idPartner", pos+1);
+            nuevo.put("idPartner", identificadores.get(pos));
             db.insert("Albaranes", null, nuevo);
             Cursor c = db.rawQuery("SELECT MAX(idAlbaran) FROM Albaranes",null,null);
             c.moveToFirst();
