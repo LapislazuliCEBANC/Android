@@ -4,12 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NuevoPartnerActivity extends AppCompatActivity {
     EditText nombre;
@@ -36,40 +35,107 @@ public class NuevoPartnerActivity extends AppCompatActivity {
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean p1 = false, p2 = false, p3 = false, p4 = false, p5 = false, p6 = false;
+                //Opción 1
+                //Pro: Indica el campo erroneo de arriba abajo
+                //Contra: Uno por uno
+//                boolean camposValidos = false;
+//
+//                if(nombre.getText().length() == 0){
+//                    nombre.setError("El campo debe completarse");
+//                    nombre.requestFocus();
+//                    camposValidos = false;
+//                }else if(direccion.getText().length() == 0){
+//                    direccion.setError("El campo debe completarse");
+//                    direccion.requestFocus();
+//                    camposValidos = false;
+//                }else if(poblacion.getText().length() == 0){
+//                    poblacion.setError("El campo debe completarse");
+//                    poblacion.requestFocus();
+//                    camposValidos = false;
+//                }else if(cif.getText().length() == 0){ //Estoy utilizando el método sin letra
+//                    cif.setError("El campo debe completarse");
+//                    cif.requestFocus();
+//                    camposValidos = false;
+//                }else if(!validarDNIsinLetra(cif.getText().toString())){
+//                    cif.setError("El CIF ha de ser valido");
+//                    cif.requestFocus();
+//                    camposValidos = false;
+//                }else if(telefono.getText().length() == 0){
+//                    telefono.setError("El campo debe completarse");
+//                    telefono.requestFocus();
+//                    camposValidos = false;
+//                }else if(!validarTelefono(telefono.getText().toString())) {
+//                    telefono.setError("El telefono ha de ser valido");
+//                    telefono.requestFocus();
+//                    camposValidos = false;
+//                }else if(email.getText().length() == 0){
+//                    email.setError("El campo debe completarse");
+//                    email.requestFocus();
+//                    camposValidos = false;
+//                }else{
+//                    camposValidos = true;
+//                }
+//
+//                if (camposValidos){
+//                    escribir();
+//                    finish();
+//                }
+
+                //Opción 2
+                //Pro: Indica todos los campos erroneos a la vez
+                //Contra: Si hay correctos y erroneos indica el primero de abajo arriba
+                boolean v1=false, v2=false, v3=false, v4=false, v5=false, v6=false;
+
                 if(nombre.getText().length() == 0){
                     nombre.setError("El campo debe completarse");
+                    nombre.requestFocus();
                 }else{
-                    p1 = true;
+                    v1 = true;
                 }
+
                 if(direccion.getText().length() == 0){
                     direccion.setError("El campo debe completarse");
+                    direccion.requestFocus();
                 }else{
-                    p2 = true;
+                    v2 = true;
                 }
+
                 if(poblacion.getText().length() == 0){
                     poblacion.setError("El campo debe completarse");
+                    poblacion.requestFocus();
                 }else{
-                    p3 = true;
+                    v3 = true;
                 }
-                //TODO: Comprobar 8 numeros y una letra nada mas porque no me apetece estar generando mierdas
+
+                //Estoy utilizando el método sin letra
                 if(cif.getText().length() == 0){
                     cif.setError("El campo debe completarse");
+                    cif.requestFocus();
+                }else if(!validarDNIsinLetra(cif.getText().toString())){
+                    cif.setError("El CIF ha de ser valido");
+                    cif.requestFocus();
                 }else{
-                    p4 = true;
+                    v4 = true;
                 }
-                //TODO: Comprobar que son nueve numeros
+
                 if(telefono.getText().length() == 0){
                     telefono.setError("El campo debe completarse");
+                    telefono.requestFocus();
+                }else if(!validarTelefono(telefono.getText().toString())) {
+                    telefono.setError("El telefono ha de ser valido");
+                    telefono.requestFocus();
                 }else{
-                    p5 = true;
+                    v5 = true;
                 }
+
                 if(email.getText().length() == 0){
                     email.setError("El campo debe completarse");
+                    email.requestFocus();
                 }else{
-                    p6 = true;
+                    v6 = true;
                 }
-                if (p1 && p2 && p3 && p4 && p5 && p6){
+
+                if (v1 && v2 && v3 && v4 && v5 && v6){
                     escribir();
                     finish();
                 }
@@ -99,5 +165,78 @@ public class NuevoPartnerActivity extends AppCompatActivity {
         nuevo.put("email",email.getText().toString());
 
         db.insert("Partners", null, nuevo);
+    }
+
+    //TODO: Injección De Veneno
+    //Validaciones
+    public boolean validarDNIsinLetra(String dni){
+        boolean valido=false;
+        String dniNumeros;
+
+        dniNumeros = dni.substring(0,8);
+
+        if(dni.length() != 9 || !isNumeric(dniNumeros) || !Character.isLetter(dni.charAt(8))) {
+            valido = false;
+        }else{
+            valido = true;
+        }
+
+        return valido;
+    }
+
+    public static boolean validarTelefono(String telefono){
+        boolean valido=false;
+
+         if(telefono.length() != 9 || !isNumeric(telefono)) {
+            valido = false;
+        }else{
+            valido = true;
+        }
+
+        return valido;
+    }
+
+    //Método completo con verificación de letra
+    public static boolean validarDNI(String dni){
+        boolean valido=false;
+        String letraMayuscula = "";
+        String dniNumeros;
+
+        dniNumeros = dni.substring(0,8);
+        letraMayuscula = (dni.substring(8).toUpperCase());
+
+        if(dni.length() != 9 || !isNumeric(dniNumeros) || !Character.isLetter(dni.charAt(8)) || !letraDNI(dni).equals(letraMayuscula)) {
+            valido = false;
+        }else{
+            valido = true;
+        }
+
+        return valido;
+    }
+
+    private static boolean isNumeric(String cadena){
+        boolean valido = false;
+
+        try {
+            Integer.parseInt(cadena);
+            valido = true;
+        } catch (NumberFormatException nfe){
+            valido = false;
+        }
+
+        return valido;
+    }
+
+    public static String letraDNI(String dni){
+        String letra = "";
+        int miDNI = Integer.parseInt(dni.substring(0,8));
+        int resto = 0;
+        String[] asignacionLetra = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+
+        resto = miDNI % 23;
+
+        letra = asignacionLetra[resto];
+
+        return letra;
     }
 }
