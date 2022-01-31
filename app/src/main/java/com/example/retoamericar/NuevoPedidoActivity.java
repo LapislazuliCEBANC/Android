@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class NuevoPedidoActivity extends AppCompatActivity {
     TextView idAlbaran;
+    ListView lista;
+    Button crear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,5 +19,11 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         Intent data = getIntent();
         idAlbaran = findViewById(R.id.txvNuevoPedidoIdAlbaran);
         idAlbaran.setText(data.getStringExtra("id"));
+
+
+    }
+
+    private void cargarLista(){
+
     }
 }
