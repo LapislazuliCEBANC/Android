@@ -69,7 +69,6 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
                 " idAlbaran INTEGER," +
                 " idArticulo INTEGER," +
                 " cantidad INTEGER," +
-                " descuento INTEGER," +
                 " precio INTEGER," +
                 " CONSTRAINT pkLineas" +
                 " PRIMARY KEY (idLinea)," +
