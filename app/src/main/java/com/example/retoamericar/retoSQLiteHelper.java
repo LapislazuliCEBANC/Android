@@ -71,16 +71,15 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
                 " idAlbaran INTEGER," +
                 " idArticulo INTEGER," +
                 " cantidad INTEGER," +
-                " descuento INTEGER," +
                 " precio INTEGER," +
                 " CONSTRAINT pkLineas" +
                 " PRIMARY KEY (idLinea)," +
                 " CONSTRAINT fkLineasAlbaran" +
                 " FOREIGN KEY (idAlbaran)" +
-                " REFERENCES Albaranes(idAlbaran)," +
+                " REFERENCES Albaranes(idAlbaran) ON DELETE CASCADE," +
                 " CONSTRAINT fkLineasArticulos" +
                 " FOREIGN KEY (idArticulo)" +
-                " REFERENCES Articulos(idArticulo)" +
+                " REFERENCES Articulos(idArticulo) ON DELETE CASCADE" +
                 ")";
 
         sqLiteDatabase.execSQL(crearComerciales);
