@@ -104,7 +104,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         String[] fechaUltimaSalida = {"'02-12-1988'","'15-04-1988'","'19-02-1988'","'25-04-1988'","'06-02-1988'","'13-11-1988'",
         "'19-02-1988'","'28-01-1988'","'14-06-1988'","'20-01-1988'","'22-11-1988'","'05-12-1988'"};
 
-        for(int i=0; i<12;i++){
+        for(int i=0; i<descripcion.length;i++){
             String desc = descripcion[i];
             String fe = fechaUltimaEntrada[i];
             String fs = fechaUltimaSalida[i];
