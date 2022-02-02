@@ -101,12 +101,15 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         int[] sobreMaximo = {35,39,96,61,92,41,70,48,57,111,49,119};
         String[] fechaUltimaEntrada = {"'09-06-1988'","'01-07-1988'","'22-03-1988'","'21-11-1988'","'28-09-1988'","'05-10-1988'",
         "'09-07-1988'","'09-07-1988'","'25-04-1988'","'13-06-1988'","'27-12-1988'","'03-12-1988'"};
-        String[] fehcaUltimaSalida = {"'02-12-1988'","'15-04-1988'","'19-02-1988'","'25-04-1988'","'06-02-1988'","'13-11-1988'",
+        String[] fechaUltimaSalida = {"'02-12-1988'","'15-04-1988'","'19-02-1988'","'25-04-1988'","'06-02-1988'","'13-11-1988'",
         "'19-02-1988'","'28-01-1988'","'14-06-1988'","'20-01-1988'","'22-11-1988'","'05-12-1988'"};
 
         for(int i=0; i<12;i++){
-
-            sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prcost,prvent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) VALUES ("+descripcion+","+prVent[i]+",23434,23423,32434,234234,'78-98','98-988')");
+            String desc = descripcion[i];
+            String fe = fechaUltimaEntrada[i];
+            String fs = fechaUltimaSalida[i];
+            sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prCost,prVent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) " +
+                                   "VALUES ("+desc+","+prCost[i]+","+prVent[i]+","+existencias[i]+","+bajoMinimo[i]+","+sobreMaximo[i]+","+fe+","+fs+")");
         }
     }
 
