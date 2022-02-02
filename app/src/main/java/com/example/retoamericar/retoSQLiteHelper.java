@@ -87,8 +87,9 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(crearAlbaranes);
         sqLiteDatabase.execSQL(crearArticulos);
         sqLiteDatabase.execSQL(crearLineas);
-        int tupu = 3;
-        sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Prueba','Prueba',tupu)");
+
+        sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Prueba','Prueba','prueba')");
+
         //TODO: Meter los datos por defecto de articulos y comerciales
         //Artículos
         String[] descripcion = {"'Ford Mustang Mach-E'","'Tesla Model Y'","'GMC Sierra AT4 2019'","'Fiskher' ","'Ford Mustang GT'",
@@ -104,16 +105,14 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         "'19-02-1988'","'28-01-1988'","'14-06-1988'","'20-01-1988'","'22-11-1988'","'05-12-1988'"};
 
         for(int i=0; i<12;i++){
-            String peru = descripcion[i];
 
-            sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prcost,prvent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) VALUES (?,"+prVent[i]+",23434,23423,32434,234234,'78-98','98-988')");
-            PreparedStatement pstm =
+            sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prcost,prvent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) VALUES ("+descripcion+","+prVent[i]+",23434,23423,32434,234234,'78-98','98-988')");
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-
     }
+
+
 }
