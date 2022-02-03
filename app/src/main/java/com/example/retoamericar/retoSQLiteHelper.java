@@ -50,8 +50,8 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
                 " CONSTRAINT pkAlbaranes" +
                 " PRIMARY KEY (idAlbaran)," +
                 " CONSTRAINT fkAlbaranesPartners" +
-                " FOREIGN KEY (idPArtner)" +
-                " REFERENCES Partners(idPartner)" +
+                " FOREIGN KEY (idPartner)" +
+                " REFERENCES Partners(idPartner) ON DELETE CASCADE" +
                 ")";
         String crearArticulos = "CREATE TABLE Articulos(" +
                 " idArticulo INTEGER," +
