@@ -26,8 +26,8 @@ public class RecyclerViewAdapterPedido extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             idArticulo = itemView.findViewById(R.id.txvLineaIdArticulo);
             descripcion = itemView.findViewById(R.id.txvLineaDescripcion);
-            cantidad = itemView.findViewById(R.id.txvAlbaranFechaEnvio);
-            precio = itemView.findViewById(R.id.txvAlbaranFechaPago);
+            cantidad = itemView.findViewById(R.id.txvLineaCantidad);
+            precio = itemView.findViewById(R.id.txvLineaPrecio);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
         }
@@ -42,7 +42,7 @@ public class RecyclerViewAdapterPedido extends RecyclerView.Adapter<RecyclerView
     @NonNull
     @Override
     public MiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.albaran, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.linea, null, false);
         return new MiViewHolder(view);
     }
 

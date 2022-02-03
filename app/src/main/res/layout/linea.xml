@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:text="id"
             android:textSize="16dp" />
@@ -23,6 +24,7 @@
             android:id="@+id/txvLineaDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="Descripcion"
             android:textSize="16dp" />
     </LinearLayout>
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:text="Cantidad"
             android:textSize="16dp" />
 
@@ -45,6 +48,7 @@
             android:id="@+id/txvLineaPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="Precio"
             android:textSize="16dp" />
     </LinearLayout>

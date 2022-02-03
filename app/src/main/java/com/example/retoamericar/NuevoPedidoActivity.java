@@ -64,7 +64,11 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                crearLinea();
+                if (cant.getText().length()>0){
+                    crearLinea();
+                    cargarLista();
+                }
+
             }
         });
 
@@ -83,9 +87,9 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         String[] args = new String[]{id};
 
         Cursor c = db.rawQuery(
-                "SELECT a.idArticulo as _id, descripcion, cantidad, precio " +
+                "SELECT l.idLinea as _id, descripcion, cantidad, precio " +
                     "FROM Articulos a, Lineas l " +
-                    "WHERE l.idAlbaran = ?",args);
+                    "WHERE l.idAlbaran = ? AND a.idArticulo= l.idArticulo",args);
         if (c.moveToFirst()){
             lista.setVisibility(View.VISIBLE);
             lista.setLayoutManager(new GridLayoutManager(this,2));
