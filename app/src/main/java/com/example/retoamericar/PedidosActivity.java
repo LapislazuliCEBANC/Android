@@ -114,7 +114,7 @@ public class PedidosActivity extends AppCompatActivity {
                 lista.setVisibility(View.VISIBLE);
                 lista.setLayoutManager(new GridLayoutManager(this,4));
 
-                RecyclerViewAdapter rva = new RecyclerViewAdapter(c);
+                RecyclerViewAdapterAlbaran rva = new RecyclerViewAdapterAlbaran(c);
                 rva.notifyDataSetChanged();
                 lista.setAdapter(rva);
             }else{

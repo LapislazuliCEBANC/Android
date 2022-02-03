@@ -2,7 +2,6 @@ package com.example.retoamericar;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MiViewHolder> {
+public class RecyclerViewAdapterAlbaran extends RecyclerView.Adapter<RecyclerViewAdapterAlbaran.MiViewHolder> {
 
     private Cursor c;
-    public RecyclerViewAdapter(Cursor c) {
+    public RecyclerViewAdapterAlbaran(Cursor c) {
         this.c = c;
     }
 
