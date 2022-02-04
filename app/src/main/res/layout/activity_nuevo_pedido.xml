@@ -77,12 +77,14 @@
                 android:layout_margin="5dp"
                 android:text="@string/eliminar" />
 
-            <TextView
-                android:id="@+id/txvNuevoPedidoIdEliminar"
+            <EditText
+                android:id="@+id/edtNuevoPedidoEliminar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="24sp" />
+                android:ems="10"
+                android:hint="@string/eliminar"
+                android:inputType="number" />
+
         </LinearLayout>
 
     </LinearLayout>

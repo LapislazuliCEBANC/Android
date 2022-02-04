@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,13 +22,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class NuevoPedidoActivity extends AppCompatActivity {
-    TextView cant;
     int pos;
     TextView idAlbaran;
     RecyclerView lista;
     Button crear;
+    EditText cantCrear;
     Cursor articulos;
-    Button eliminar;//TODO: El boton
+    Button eliminar;
+    EditText idEliminar;
     String id;
     Spinner spin;
     ArrayList<Integer> identificadores = new ArrayList<Integer>();
@@ -40,7 +43,8 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         idAlbaran = findViewById(R.id.txvNuevoPedidoIdAlbaran);
         idAlbaran.setText(id);
 
-        cant=findViewById(R.id.edtNuevoPedidoCantidad);
+        cantCrear=findViewById(R.id.edtNuevoPedidoCantidad);
+        idEliminar =findViewById(R.id.edtNuevoPedidoEliminar);
 
         lista=findViewById(R.id.rcvNuevoPedidoLista);
         cargarLista();
@@ -59,19 +63,27 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             }
         });
 
-
         crear=findViewById(R.id.btnNuevoPedidoCrear);
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cant.getText().length()>0){
+                if (cantCrear.getText().length()>0){
                     crearLinea();
-                    cargarLista();
+
                 }
 
             }
         });
 
+        eliminar=findViewById(R.id.btnNuevoEliminar);
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(idEliminar.getText().length()>0){
+                    eliminarLinea(idEliminar.getText().toString());
+                }
+            }
+        });
     }
 
     @Override
@@ -133,10 +145,26 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         ContentValues nuevo = new ContentValues();
         nuevo.put("idAlbaran", id);
         nuevo.put("idArticulo", identificadores.get(pos));
-        nuevo.put("cantidad", Integer.valueOf(cant.getText().toString()));
+        nuevo.put("cantidad", Integer.valueOf(cantCrear.getText().toString()));
         articulos.moveToPosition(pos);
         nuevo.put("precio", articulos.getInt(1));
 
         db.insert("Lineas", null, nuevo);
+        cargarLista();
+    }
+
+    private void eliminarLinea(String id){
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        String[] args = new String[] {id};
+
+        Cursor c=db.rawQuery("SELECT idLinea " +
+                                 "FROM Lineas " +
+                                 "WHERE idLinea=?",args);
+        if (c.moveToFirst()){
+            db.delete("Lineas","idLinea=?",args);
+            cargarLista();
+        }
     }
 }

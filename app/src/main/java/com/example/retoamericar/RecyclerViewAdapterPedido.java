@@ -17,7 +17,7 @@ public class RecyclerViewAdapterPedido extends RecyclerView.Adapter<RecyclerView
         this.c = c;
     }
 
-    public class MiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MiViewHolder extends RecyclerView.ViewHolder{
         TextView idArticulo;
         TextView descripcion;
         TextView cantidad;
@@ -28,15 +28,8 @@ public class RecyclerViewAdapterPedido extends RecyclerView.Adapter<RecyclerView
             descripcion = itemView.findViewById(R.id.txvLineaDescripcion);
             cantidad = itemView.findViewById(R.id.txvLineaCantidad);
             precio = itemView.findViewById(R.id.txvLineaPrecio);
-            itemView.setClickable(true);
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            TextView idEliminar = itemView.findViewById(R.id.txvNuevoPedidoIdEliminar);
-            idEliminar.setText(idArticulo.getText().toString());
-        }
     }
 
     @NonNull
