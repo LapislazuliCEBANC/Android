@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         agenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: Hacer la agenda
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         envio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: a saber que vamos a hacer con esto
                 //Intent intent = new Intent(MainActivity.this, Gmail_attachment.class);
                 //startActivity(intent);
             }

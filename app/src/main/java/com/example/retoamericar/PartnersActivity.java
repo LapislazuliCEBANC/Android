@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
@@ -31,6 +32,12 @@ public class PartnersActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(PartnersActivity.this, NuevoPartnerActivity.class);
                 startActivity(i);
+            }
+        });
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //TODO: El dialogo personalizado para eliminar o modificar partners (o que devuelva que boton ha pulsado entre cancelar,modificar,eliminar)
             }
         });
     }

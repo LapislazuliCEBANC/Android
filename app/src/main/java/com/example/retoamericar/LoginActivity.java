@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     EditText usuario;
@@ -31,13 +32,16 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: comprobar lso campos
+
                 String[] args = new String[]{usuario.getText().toString(), contrasena.getText().toString()};
                 Cursor c = db.rawQuery("SELECT usuario, contrasena, idComercial FROM Comerciales WHERE usuario=? AND contrasena=?",args);
                 if (c.moveToFirst()){
                     ponerGD(c.getInt(2));
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
+                }else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"El usiaro o la contraseña no so validos", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
