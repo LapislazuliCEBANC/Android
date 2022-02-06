@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetoAmericar">
         <activity
+            android:name=".ModificarPartner"
+            android:exported="false" />
+        <activity
             android:name=".NuevoPedidoActivity"
             android:exported="false" />
         <activity

@@ -37,8 +37,8 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_pedido);
-        Intent data = getIntent();
 
+        Intent data = getIntent();
         id = data.getStringExtra("id");
         idAlbaran = findViewById(R.id.txvNuevoPedidoIdAlbaran);
         idAlbaran.setText(id);

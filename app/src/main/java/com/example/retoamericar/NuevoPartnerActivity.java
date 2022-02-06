@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class NuevoPartnerActivity extends AppCompatActivity {
     EditText nombre;
@@ -80,6 +79,7 @@ public class NuevoPartnerActivity extends AppCompatActivity {
 //                    escribir();
 //                    finish();
 //                }
+
 
                 //Opción 2
                 //Pro: Indica todos los campos erroneos a la vez

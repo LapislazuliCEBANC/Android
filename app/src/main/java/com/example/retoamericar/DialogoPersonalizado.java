@@ -1,6 +1,5 @@
 package com.example.retoamericar;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
@@ -16,7 +15,7 @@ public class DialogoPersonalizado extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.activity_dialogo_personalizado, null))
+        builder.setView(inflater.inflate(R.layout.dialogo_personalizado, null))
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

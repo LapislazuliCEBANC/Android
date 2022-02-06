@@ -37,6 +37,7 @@
     <string name="existencias">Existencias</string>
     <string name="cantidad">Cantidad</string>
     <string name="anadir">Añadir</string>
+    <string name="modificar">Modificar</string>
 
 
 </resources>
