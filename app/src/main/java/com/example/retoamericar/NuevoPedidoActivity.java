@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,7 +26,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     RecyclerView lista;
     Button crear;
     EditText cantCrear;
-    Cursor articulos;
+    Cursor cursorArticulos;
     Button eliminar;
     EditText idEliminar;
     String id;
@@ -40,6 +39,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
 
         Intent data = getIntent();
         id = data.getStringExtra("id");
+
         idAlbaran = findViewById(R.id.txvNuevoPedidoIdAlbaran);
         idAlbaran.setText(id);
 
@@ -101,12 +101,12 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         Cursor c = db.rawQuery(
                 "SELECT l.idLinea as _id, descripcion, cantidad, precio " +
                     "FROM Articulos a, Lineas l " +
-                    "WHERE l.idAlbaran = ? AND a.idArticulo= l.idArticulo",args);
+                    "WHERE l.idAlbaran = ? AND a.idArticulo = l.idArticulo",args);
         if (c.moveToFirst()){
             lista.setVisibility(View.VISIBLE);
-            lista.setLayoutManager(new GridLayoutManager(this,2));
+            lista.setLayoutManager(new GridLayoutManager(this,1));
 
-            RecyclerViewAdapterPedido rva = new RecyclerViewAdapterPedido(c);
+            RecyclerViewAdapterLinea rva = new RecyclerViewAdapterLinea(c);
             rva.notifyDataSetChanged();
             lista.setAdapter(rva);
         }else{
@@ -121,19 +121,19 @@ public class NuevoPedidoActivity extends AppCompatActivity {
 
         String id = String.valueOf((((GlobalData) this.getApplication()).getIdComercial()));
 
-        String[] campos = new String[]{"descripcion as _id","prCost","prVent","existencias","idArticulo"};
+        String[] campos = new String[]{"idArticulo", "descripcion as _id", "prCost", "prVent", "existencias"};
 
-        articulos = db.query("Articulos", campos, null, null, null, null, null);
-        if (articulos.moveToFirst()){
-            SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.articulo,articulos,
+        cursorArticulos = db.query("Articulos", campos, null, null, null, null, null);
+        if (cursorArticulos.moveToFirst()){
+            SimpleCursorAdapter sca = new SimpleCursorAdapter(this,R.layout.articulo, cursorArticulos,
                     new String[]{"_id","prCost","prVent","existencias"},
                     new int[]{R.id.txvArticuloDescripcion, R.id.txvArticuloPrCost, R.id.txvArticuloPrVent, R.id.txvArticuloExistencias},
                     CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             sca.setDropDownViewResource(R.layout.articulo_pedido);
             spin.setAdapter(sca);
             do {
-                identificadores.add(articulos.getInt(4));
-            }while (articulos.moveToNext());
+                identificadores.add(cursorArticulos.getInt(0));
+            }while (cursorArticulos.moveToNext());
         }
         db.close();
     }
@@ -142,20 +142,30 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getWritableDatabase();
 
-        ContentValues nuevo = new ContentValues();
-        nuevo.put("idAlbaran", id);
-        nuevo.put("idArticulo", identificadores.get(pos));
-        nuevo.put("cantidad", Integer.valueOf(cantCrear.getText().toString()));
-        articulos.moveToPosition(pos);
-        nuevo.put("precio", articulos.getInt(1));
+        cursorArticulos.moveToPosition(pos);
+        int cant = Integer.valueOf(cantCrear.getText().toString());
+        int existencias = cursorArticulos.getInt(4);
+        if((existencias-cant)>=0){
+            ContentValues nuevo = new ContentValues();
+            nuevo.put("idAlbaran", id);
+            nuevo.put("idArticulo", identificadores.get(pos));
+            nuevo.put("cantidad", cant);
+            nuevo.put("precio", cursorArticulos.getInt(2));
 
-        db.insert("Lineas", null, nuevo);
+            db.insert("Lineas", null, nuevo);
+
+            ContentValues valores = new ContentValues();
+            valores.put("existencias",existencias-cant);
+            db.update("Articulos", valores, "idArticulo="+identificadores.get(pos),null);
+            cantCrear.setText("");
+        }
+        cargarSpinner();
         cargarLista();
     }
 
     private void eliminarLinea(String id){
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-        SQLiteDatabase db = rsdb.getReadableDatabase();
+        SQLiteDatabase db = rsdb.getWritableDatabase();
 
         String[] args = new String[] {id};
 

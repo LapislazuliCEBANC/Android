@@ -121,7 +121,6 @@ public class ModificarPartner extends AppCompatActivity {
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getReadableDatabase();
 
-
         String[] args = {id};
 
         Cursor c = db.rawQuery("SELECT nombre, direccion, poblacion, cif, telefono, email " +

@@ -89,7 +89,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(crearLineas);
 
         sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Prueba','Prueba','prueba')");
-
+        sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Admin','admin','admin')");
         //TODO: Meter los datos por defecto de comerciales
         //Artículos
         String[] descripcion = {"'Ford Mustang Mach-E'","'Tesla Model Y'","'GMC Sierra AT4 2019'","'Fiskher' ","'Ford Mustang GT'",
@@ -115,6 +115,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
     }
 
 

@@ -1,6 +1,5 @@
 package com.example.retoamericar;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerViewAdapterPedido extends RecyclerView.Adapter<RecyclerViewAdapterPedido.MiViewHolder> {
+public class RecyclerViewAdapterLinea extends RecyclerView.Adapter<RecyclerViewAdapterLinea.MiViewHolder> {
 
     private Cursor c;
-    public RecyclerViewAdapterPedido(Cursor c) {
+    public RecyclerViewAdapterLinea(Cursor c) {
         this.c = c;
     }
 

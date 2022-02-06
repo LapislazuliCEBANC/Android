@@ -81,17 +81,13 @@ public class PartnersActivity extends AppCompatActivity {
     }
 
     private void dialogo(int id) {
-        Log.e("HEYYYYYYYYYYYYYYYYYYYYY","HE RECIBIDO EL ID: "+id);
         String[] opc = {"Modificar","Eliminar","Cancelar"};
-        int[] resultado = {3};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona una opcion");
         builder.setItems(opc, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                resultado[0] = i;
-                esperador(id, resultado[0]);
+                esperador(id, i);
             }
         });
         builder.show();

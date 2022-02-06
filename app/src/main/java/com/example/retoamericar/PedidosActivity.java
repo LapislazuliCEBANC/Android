@@ -126,8 +126,10 @@ public class PedidosActivity extends AppCompatActivity {
 
     private int crearPedido(){
         int result = 1;
+
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getWritableDatabase();
+
         String idc = String.valueOf(((GlobalData) this.getApplication()).getIdComercial());
 
         String[] camposPartner = new String[]{"idPartner"};
@@ -144,6 +146,7 @@ public class PedidosActivity extends AppCompatActivity {
             nuevo.put("fechaAlbaran", dateFormat.format(date));
             nuevo.put("idPartner", identificadores.get(pos));
             db.insert("Albaranes", null, nuevo);
+
             Cursor c = db.rawQuery("SELECT MAX(idAlbaran) FROM Albaranes",null,null);
             c.moveToFirst();
             result = c.getInt(0);

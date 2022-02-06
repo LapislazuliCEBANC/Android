@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerViewAdapterAlbaran extends RecyclerView.Adapter<RecyclerViewAdapterAlbaran.MiViewHolder> {
 
     private Cursor c;
+
     public RecyclerViewAdapterAlbaran(Cursor c) {
         this.c = c;
     }

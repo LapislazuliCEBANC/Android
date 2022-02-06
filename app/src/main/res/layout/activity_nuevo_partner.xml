@@ -67,7 +67,7 @@
         android:layout_marginRight="15dp"
         android:ems="10"
         android:hint="@string/Telefono"
-        android:inputType="number"
+        android:inputType="phone"
         android:minHeight="48dp" />
 
     <EditText
