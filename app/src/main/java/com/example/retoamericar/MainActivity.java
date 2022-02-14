@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -112,8 +117,37 @@ public class MainActivity extends AppCompatActivity {
         importar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                insertar();
                 //TODO: Hacer el import de xml
             }
         });
+
+
+
+    }
+
+    public void insertar(){
+        ArrayList<Articulo> lista;
+        lista = ArticuloXML.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"));
+
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ContentValues nuevo = new ContentValues();
+            nuevo.put("idArticulo", lista.get(i).getId());
+            nuevo.put("descripcion", lista.get(i).getDesc());
+            nuevo.put("prCost", lista.get(i).getPrCost());
+            nuevo.put("prVent", lista.get(i).getPrVent());
+            nuevo.put("existencias", lista.get(i).getExistencias());
+            nuevo.put("bajoMinimo", lista.get(i).getBajoMinimo());
+            nuevo.put("sobreMaximo", lista.get(i).getSobreMaximo());
+            nuevo.put("fecUltEnt", lista.get(i).getFecUltEnt());
+            nuevo.put("fecUltSal", lista.get(i).getFecUltSal());
+
+            db.insert("Articulos",null,nuevo);
+
+        }
+        db.close();
     }
 }
