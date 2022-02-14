@@ -92,25 +92,25 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO Comerciales (nombre,usuario,contrasena) VALUES ('Admin','admin','admin')");
         //TODO: Meter los datos por defecto de comerciales
         //Artículos
-        String[] descripcion = {"'Ford Mustang Mach-E'","'Tesla Model Y'","'GMC Sierra AT4 2019'","'Fiskher' ","'Ford Mustang GT'",
-        "'Cadillac Eldorado'","'Chevrolet Bolt EV'","'Chrysler Voyager'","'Apollo Intensa Emozione 2018'","'Dodge Charger SE'","'Ford F-150'","'Ford GT'"};
-        int[] prVent = {33521,21360,25506,40119,37189,36651,18049,43366,35058,38113,33191,42153};
-        int[] prCost = {67042,42721,51013,80238,74378,73302,36098,86733,70116,76226,66382,84307};
-        int[] existencias = {27,30,74,47,71,32,54,37,44,86,38,92};
-        int[] bajoMinimo = {18,21,51,32,49,22,37,25,30,60,26,64};
-        int[] sobreMaximo = {35,39,96,61,92,41,70,48,57,111,49,119};
-        String[] fechaUltimaEntrada = {"'09-06-1988'","'01-07-1988'","'22-03-1988'","'21-11-1988'","'28-09-1988'","'05-10-1988'",
-        "'09-07-1988'","'09-07-1988'","'25-04-1988'","'13-06-1988'","'27-12-1988'","'03-12-1988'"};
-        String[] fechaUltimaSalida = {"'02-12-1988'","'15-04-1988'","'19-02-1988'","'25-04-1988'","'06-02-1988'","'13-11-1988'",
-        "'19-02-1988'","'28-01-1988'","'14-06-1988'","'20-01-1988'","'22-11-1988'","'05-12-1988'"};
-
-        for(int i=0; i<descripcion.length;i++){
-            String desc = descripcion[i];
-            String fe = fechaUltimaEntrada[i];
-            String fs = fechaUltimaSalida[i];
-            sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prCost,prVent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) " +
-                                   "VALUES ("+desc+","+prCost[i]+","+prVent[i]+","+existencias[i]+","+bajoMinimo[i]+","+sobreMaximo[i]+","+fe+","+fs+")");
-        }
+        //String[] descripcion = {"'Ford Mustang Mach-E'","'Tesla Model Y'","'GMC Sierra AT4 2019'","'Fiskher' ","'Ford Mustang GT'",
+        //"'Cadillac Eldorado'","'Chevrolet Bolt EV'","'Chrysler Voyager'","'Apollo Intensa Emozione 2018'","'Dodge Charger SE'","'Ford F-150'","'Ford GT'"};
+        //int[] prVent = {33521,21360,25506,40119,37189,36651,18049,43366,35058,38113,33191,42153};
+        //int[] prCost = {67042,42721,51013,80238,74378,73302,36098,86733,70116,76226,66382,84307};
+        //int[] existencias = {27,30,74,47,71,32,54,37,44,86,38,92};
+        //int[] bajoMinimo = {18,21,51,32,49,22,37,25,30,60,26,64};
+        //int[] sobreMaximo = {35,39,96,61,92,41,70,48,57,111,49,119};
+        //String[] fechaUltimaEntrada = {"'09-06-1988'","'01-07-1988'","'22-03-1988'","'21-11-1988'","'28-09-1988'","'05-10-1988'",
+        //"'09-07-1988'","'09-07-1988'","'25-04-1988'","'13-06-1988'","'27-12-1988'","'03-12-1988'"};
+        //String[] fechaUltimaSalida = {"'02-12-1988'","'15-04-1988'","'19-02-1988'","'25-04-1988'","'06-02-1988'","'13-11-1988'",
+        //"'19-02-1988'","'28-01-1988'","'14-06-1988'","'20-01-1988'","'22-11-1988'","'05-12-1988'"};
+        //
+        //for(int i=0; i<descripcion.length;i++){
+        //    String desc = descripcion[i];
+        //    String fe = fechaUltimaEntrada[i];
+        //    String fs = fechaUltimaSalida[i];
+        //    sqLiteDatabase.execSQL("INSERT INTO Articulos (descripcion,prCost,prVent,existencias,bajoMinimo,sobreMaximo,fecUltEnt,fecUltSal) " +
+        //                           "VALUES ("+desc+","+prCost[i]+","+prVent[i]+","+existencias[i]+","+bajoMinimo[i]+","+sobreMaximo[i]+","+fe+","+fs+")");
+        //}
     }
 
     @Override

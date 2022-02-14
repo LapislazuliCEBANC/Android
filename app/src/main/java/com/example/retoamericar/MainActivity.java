@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     CardView llamada, correo, localizacion, acercaDe;
-    CardView agenda, partner, pedido, envio;
+    CardView agenda, partner, pedido, envio, importar;
 
 
     @Override
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         partner = (CardView) findViewById(R.id.bPartners);
         pedido = (CardView) findViewById(R.id.bPedidos);
         envio = (CardView) findViewById(R.id.bMandar);
-
+        importar = (CardView) findViewById(R.id.bImportar);
 
         agenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: a saber que vamos a hacer con esto
                 //Intent intent = new Intent(MainActivity.this, Gmail_attachment.class);
                 //startActivity(intent);
+            }
+        });
+
+        importar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Hacer el import de xml
             }
         });
     }
