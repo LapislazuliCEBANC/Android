@@ -13,35 +13,42 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class ArticuloXML {
+public class ArticuloXML<Objeto> {
 
+    public ArticuloXML() {
+    }
 
-    public static ArrayList<Articulo> lector(File ficheroXML){
-        ArrayList<Articulo> lista = new ArrayList<>();
-        Articulo articulo;
+    public ArrayList<Objeto> lector (File ficheroXML, String etiqueta, String[] etiquetas){
+        ArrayList<Objeto> lista = new ArrayList<>();
+        Objeto objeto;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(ficheroXML);
             document.getDocumentElement().normalize();
 
-            NodeList articulos = document.getElementsByTagName("Articulo");
+            NodeList articulos = document.getElementsByTagName(etiqueta);
             for (int i = 0; i < articulos.getLength(); i++) {
-                articulo = new Articulo();
+                objeto = (Objeto) new Object();
                 Node arti = articulos.item(i);
                 if (arti.getNodeType() == Node.ELEMENT_NODE){
                     Element elemento = (Element) arti;
-                    articulo.setId(Integer.parseInt(elemento.getElementsByTagName("ARTICULOID").item(0).getTextContent()));
-                    articulo.setDesc(elemento.getElementsByTagName("DESCRIPCION").item(0).getTextContent());
-                    articulo.setPrCost(Integer.parseInt(elemento.getElementsByTagName("PR_COST").item(0).getTextContent()));
-                    articulo.setPrVent(Integer.parseInt(elemento.getElementsByTagName("PR_VENT").item(0).getTextContent()));
-                    articulo.setExistencias(Integer.parseInt(elemento.getElementsByTagName("EXISTENCIAS").item(0).getTextContent()));
-                    articulo.setBajoMinimo(Integer.parseInt(elemento.getElementsByTagName("BAJO_MINIMO").item(0).getTextContent()));
-                    articulo.setSobreMaximo(Integer.parseInt(elemento.getElementsByTagName("SOBRE_MAXIMO").item(0).getTextContent()));
-                    articulo.setFecUltEnt(elemento.getElementsByTagName("FEC_ULT_ENT").item(0).getTextContent());
-                    articulo.setFecUltSal(elemento.getElementsByTagName("FEC_ULT_SAL").item(0).getTextContent());
-
-                    lista.add(articulo);
+                    String[] elementos = new String[etiquetas.length];
+                    for (int j = 0; j < etiquetas.length; j++) {
+                        elementos[i] = elemento.getElementsByTagName(etiquetas[i]).item(0).getTextContent();
+                    }
+                    /*
+                    objeto.setId(Integer.parseInt(elemento.getElementsByTagName("ARTICULOID").item(0).getTextContent()));
+                    objeto.setDesc(elemento.getElementsByTagName("DESCRIPCION").item(0).getTextContent());
+                    objeto.setPrCost(Integer.parseInt(elemento.getElementsByTagName("PR_COST").item(0).getTextContent()));
+                    objeto.setPrVent(Integer.parseInt(elemento.getElementsByTagName("PR_VENT").item(0).getTextContent()));
+                    objeto.setExistencias(Integer.parseInt(elemento.getElementsByTagName("EXISTENCIAS").item(0).getTextContent()));
+                    objeto.setBajoMinimo(Integer.parseInt(elemento.getElementsByTagName("BAJO_MINIMO").item(0).getTextContent()));
+                    objeto.setSobreMaximo(Integer.parseInt(elemento.getElementsByTagName("SOBRE_MAXIMO").item(0).getTextContent()));
+                    objeto.setFecUltEnt(elemento.getElementsByTagName("FEC_ULT_ENT").item(0).getTextContent());
+                    objeto.setFecUltSal(elemento.getElementsByTagName("FEC_ULT_SAL").item(0).getTextContent());
+                    */
+                    lista.add((Objeto) objeto);
                 }
             }
         }catch (Exception e){

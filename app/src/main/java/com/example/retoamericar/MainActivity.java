@@ -128,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void insertar(){
         ArrayList<Articulo> lista;
-        lista = ArticuloXML.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"));
+        ArticuloXML<Articulo> lector = new ArticuloXML<>();
+        lista = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"));
 
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getReadableDatabase();
