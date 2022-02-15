@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"),"Articulo",
                               new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
+        Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[0]);
         Articulo art;
         for (int i = 0; i < listaString.size(); i++) {
             art = new Articulo(listaString.get(i));

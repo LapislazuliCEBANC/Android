@@ -33,7 +33,7 @@ public class ArticuloXML {
                     Element elemento = (Element) arti;
                     String[] objetos = new String[etiquetas.length];
                     for (int j = 0; j < etiquetas.length; j++) {
-                        objetos[i] = elemento.getElementsByTagName(etiquetas[i]).item(0).getTextContent();
+                        objetos[j] = elemento.getElementsByTagName(etiquetas[j]).item(0).getTextContent();
                     }
                     /*
                     objeto.setId(Integer.parseInt(elemento.getElementsByTagName("ARTICULOID").item(0).getTextContent()));
