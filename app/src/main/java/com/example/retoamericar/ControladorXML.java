@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class ArticuloXML {
+public class ControladorXML {
 
-    public ArticuloXML() {
+    public ControladorXML() {
     }
 
     public ArrayList<String[]> lector (File ficheroXML, String etiqueta, String[] etiquetas){

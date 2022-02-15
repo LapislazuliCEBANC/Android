@@ -9,10 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -119,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
         importar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar();
+                insertarArticulos();
+                insertarPartners();
                 //TODO: Hacer el import de xml
             }
         });
@@ -128,14 +126,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void insertar(){
+    public void insertarArticulos() {
         ArrayList<String[]> listaString;
         ArrayList<Articulo> lista = new ArrayList<>();
-        ArticuloXML lector = new ArticuloXML();
+        ControladorXML lector = new ControladorXML();
 
-        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"),"Articulo",
-                              new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
-        Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[0]);
+        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"), "Articulo",
+                new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
+        //Log.e("Pr", "Ha leido bien el array " + listaString.get(0)[0]);
         Articulo art;
         for (int i = 0; i < listaString.size(); i++) {
             art = new Articulo(listaString.get(i));
@@ -156,11 +154,47 @@ public class MainActivity extends AppCompatActivity {
             nuevo.put("fecUltEnt", lista.get(i).getFecUltEnt());
             nuevo.put("fecUltSal", lista.get(i).getFecUltSal());
 
-            db.insert("Articulos",null,nuevo);
+            db.insert("Articulos", null, nuevo);
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(),"Catálogo cargado con exito", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), "Aticulos cargados con exito", Toast.LENGTH_SHORT);
         toast.show();
+
+        db.close();
+    }
+
+    public void insertarPartners(){
+        ArrayList<String[]> listaString;
+        ArrayList<Partner> lista = new ArrayList<>();
+        ControladorXML lector = new ControladorXML();
+
+        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"),"Partners",
+                new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"});
+        //Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[0]);
+        Partner art;
+        for (int i = 0; i < listaString.size(); i++) {
+            art = new Partner(listaString.get(i));
+            lista.add(art);
+        }
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ContentValues nuevo = new ContentValues();
+            nuevo.put("idPartner", lista.get(i).getIdPartner());
+            nuevo.put("idComercial", lista.get(i).getIdComercial());
+            nuevo.put("nombre", lista.get(i).getNombre());
+            nuevo.put("direccion", lista.get(i).getDireccion());
+            nuevo.put("poblacion", lista.get(i).getPoblacion());
+            nuevo.put("cif", lista.get(i).getCif());
+            nuevo.put("telefono", lista.get(i).getTelefono());
+
+            db.insert("Partners",null,nuevo);
+
+        }
+        Toast toast = Toast.makeText(getApplicationContext(),"Partners cargados con exito", Toast.LENGTH_SHORT);
+        toast.show();
+
         db.close();
     }
 }
