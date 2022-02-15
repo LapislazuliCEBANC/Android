@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             lista.add(art);
         }
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-        SQLiteDatabase db = rsdb.getReadableDatabase();
+        SQLiteDatabase db = rsdb.getWritableDatabase();
 
         for (int i = 0; i < lista.size(); i++) {
             ContentValues nuevo = new ContentValues();
@@ -168,16 +169,16 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Partner> lista = new ArrayList<>();
         ControladorXML lector = new ControladorXML();
 
-        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"),"Partners",
+        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/Partners.xml"),"Partner",
                 new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"});
-        //Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[0]);
-        Partner art;
+        //Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[2]);
+        Partner part;
         for (int i = 0; i < listaString.size(); i++) {
-            art = new Partner(listaString.get(i));
-            lista.add(art);
+            part = new Partner(listaString.get(i));
+            lista.add(part);
         }
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-        SQLiteDatabase db = rsdb.getReadableDatabase();
+        SQLiteDatabase db = rsdb.getWritableDatabase();
 
         for (int i = 0; i < lista.size(); i++) {
             ContentValues nuevo = new ContentValues();

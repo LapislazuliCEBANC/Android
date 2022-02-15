@@ -26,11 +26,11 @@ public class ControladorXML {
             Document document = builder.parse(ficheroXML);
             document.getDocumentElement().normalize();
 
-            NodeList articulos = document.getElementsByTagName(etiqueta);
-            for (int i = 0; i < articulos.getLength(); i++) {
-                Node arti = articulos.item(i);
-                if (arti.getNodeType() == Node.ELEMENT_NODE){
-                    Element elemento = (Element) arti;
+            NodeList nodulos = document.getElementsByTagName(etiqueta);
+            for (int i = 0; i < nodulos.getLength(); i++) {
+                Node node = nodulos.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+                    Element elemento = (Element) node;
                     String[] objetos = new String[etiquetas.length];
                     for (int j = 0; j < etiquetas.length; j++) {
                         objetos[j] = elemento.getElementsByTagName(etiquetas[j]).item(0).getTextContent();
