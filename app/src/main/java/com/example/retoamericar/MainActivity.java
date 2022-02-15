@@ -137,6 +137,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void insertarArticulos() {
+        ArrayList<String[]> listaString;
+        ArrayList<Articulo> lista = new ArrayList<>();
+        ControladorXML lector = new ControladorXML();
+
+        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"), "Articulo",
+                new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
+        //Log.e("Pr", "Ha leido bien el array " + listaString.get(0)[0]);
+        Articulo art;
+        for (int i = 0; i < listaString.size(); i++) {
+            art = new Articulo(listaString.get(i));
+            lista.add(art);
+        }
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getWritableDatabase();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ContentValues nuevo = new ContentValues();
+            nuevo.put("idArticulo", lista.get(i).getId());
+            nuevo.put("descripcion", lista.get(i).getDesc());
+            nuevo.put("prCost", lista.get(i).getPrCost());
+            nuevo.put("prVent", lista.get(i).getPrVent());
+            nuevo.put("existencias", lista.get(i).getExistencias());
+            nuevo.put("bajoMinimo", lista.get(i).getBajoMinimo());
+            nuevo.put("sobreMaximo", lista.get(i).getSobreMaximo());
+            nuevo.put("fecUltEnt", lista.get(i).getFecUltEnt());
+            nuevo.put("fecUltSal", lista.get(i).getFecUltSal());
+
+            db.insert("Articulos", null, nuevo);
+
+        }
+        Toast toast = Toast.makeText(getApplicationContext(), "Aticulos cargados con exito", Toast.LENGTH_SHORT);
+        toast.show();
+
+        db.close();
+    }
 
     public void insertarPartners(){
         ArrayList<String[]> listaString;
@@ -170,9 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
         db.close();
     }
-
-
-    //TODO: No funciona y no se porque
+    
     public void exportarPartners(){
         ControladorXML controladorXML = new ControladorXML();
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
@@ -192,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     "Partners","Partner",
                     new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"},
                     cursor);
+            Toast.makeText(this,"Se a exportado con exito",Toast.LENGTH_SHORT).show();
         }
     }
 

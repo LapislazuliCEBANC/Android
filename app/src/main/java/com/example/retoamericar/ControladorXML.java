@@ -71,11 +71,13 @@ public class ControladorXML {
         cursor.moveToFirst();
         //Se encarga de que solo esten los nuevos
         do{
+
             boolean nuevo = true;
             //Por cada registro del cursor mirara todos lo del xml
             for (int i = 0; i < creados.size(); i++) {
+
                 //Si el ID coincide terminara de mirar y pasara al siguiente registro
-                if (creados.get(i)[0] == cursor.getString(0)){
+                if (creados.get(i)[0].equals(cursor.getString(0))){
                     i=creados.size();
                     nuevo = false;
                 }
