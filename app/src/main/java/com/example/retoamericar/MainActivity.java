@@ -119,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 insertarArticulos();
                 insertarPartners();
-                //TODO: Hacer el import de xml
+
+                Toast toast = Toast.makeText(getApplicationContext(),"Archivos cargados con exito", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -193,8 +195,6 @@ public class MainActivity extends AppCompatActivity {
             db.insert("Partners",null,nuevo);
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(),"Partners cargados con exito", Toast.LENGTH_SHORT);
-        toast.show();
 
         db.close();
     }
