@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -158,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             db.insert("Articulos",null,nuevo);
 
         }
+        Toast toast = Toast.makeText(getApplicationContext(),"Catálogo cargado con exito", Toast.LENGTH_SHORT);
+        toast.show();
         db.close();
     }
 }
