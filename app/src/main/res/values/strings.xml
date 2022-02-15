@@ -39,6 +39,7 @@
     <string name="anadir">Añadir</string>
     <string name="modificar">Modificar</string>
     <string name="importar">IMPORTAR ARCHIVOS</string>
+    <string name="exportar">EXPORTAR ARCHIVOS</string>
 
 
 </resources>

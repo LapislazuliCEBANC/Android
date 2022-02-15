@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,13 +15,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     CardView llamada, correo, localizacion, acercaDe;
-    CardView agenda, partner, pedido, envio, importar;
+    CardView agenda, partner, pedido, envio, importar, exportar;
 
 
     @Override
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         pedido = (CardView) findViewById(R.id.bPedidos);
         envio = (CardView) findViewById(R.id.bMandar);
         importar = (CardView) findViewById(R.id.bImportar);
-
+        exportar = (CardView) findViewById(R.id.bExportar);
         agenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,46 +127,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        exportar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exportarPartners();
+            }
+        });
 
 
     }
 
-    public void insertarArticulos() {
-        ArrayList<String[]> listaString;
-        ArrayList<Articulo> lista = new ArrayList<>();
-        ControladorXML lector = new ControladorXML();
-
-        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"), "Articulo",
-                new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
-        //Log.e("Pr", "Ha leido bien el array " + listaString.get(0)[0]);
-        Articulo art;
-        for (int i = 0; i < listaString.size(); i++) {
-            art = new Articulo(listaString.get(i));
-            lista.add(art);
-        }
-        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-        SQLiteDatabase db = rsdb.getWritableDatabase();
-
-        for (int i = 0; i < lista.size(); i++) {
-            ContentValues nuevo = new ContentValues();
-            nuevo.put("idArticulo", lista.get(i).getId());
-            nuevo.put("descripcion", lista.get(i).getDesc());
-            nuevo.put("prCost", lista.get(i).getPrCost());
-            nuevo.put("prVent", lista.get(i).getPrVent());
-            nuevo.put("existencias", lista.get(i).getExistencias());
-            nuevo.put("bajoMinimo", lista.get(i).getBajoMinimo());
-            nuevo.put("sobreMaximo", lista.get(i).getSobreMaximo());
-            nuevo.put("fecUltEnt", lista.get(i).getFecUltEnt());
-            nuevo.put("fecUltSal", lista.get(i).getFecUltSal());
-
-            db.insert("Articulos", null, nuevo);
-
-        }
-        Toast toast = Toast.makeText(getApplicationContext(), "Aticulos cargados con exito", Toast.LENGTH_SHORT);
-        toast.show();
-
-        db.close();
-    }
 
     public void insertarPartners(){
         ArrayList<String[]> listaString;
@@ -198,4 +170,29 @@ public class MainActivity extends AppCompatActivity {
 
         db.close();
     }
+
+
+    //TODO: No funciona y no se porque
+    public void exportarPartners(){
+        ControladorXML controladorXML = new ControladorXML();
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("Select * from Partners",null);
+        if(cursor.moveToFirst()){
+            File fic = new File("/data/data/com.example.lapislazulireto/NuevosPartners.xml");
+            try {
+                fic.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            controladorXML.escritor(new File("/data/data/com.example.lapislazulireto/Partners.xml"),
+                    fic,
+                    "Partners","Partner",
+                    new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"},
+                    cursor);
+        }
+    }
+
 }
