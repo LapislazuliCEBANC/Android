@@ -127,10 +127,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertar(){
-        ArrayList<Articulo> lista;
-        ArticuloXML<Articulo> lector = new ArticuloXML<>();
-        lista = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"));
+        ArrayList<String[]> listaString;
+        ArrayList<Articulo> lista = new ArrayList<>();
+        ArticuloXML lector = new ArticuloXML();
 
+        listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"),"Articulo",
+                              new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
+        Articulo art;
+        for (int i = 0; i < listaString.size(); i++) {
+            art = new Articulo(listaString.get(i));
+            lista.add(art);
+        }
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getReadableDatabase();
 

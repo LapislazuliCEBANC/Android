@@ -16,6 +16,18 @@ public class Articulo {
 
     }
 
+    public Articulo(String[] articulo){
+        this.id = Integer.parseInt(articulo[0]);
+        this.desc = articulo[1];
+        this.prCost = Integer.parseInt(articulo[2]);
+        this.prVent = Integer.parseInt(articulo[3]);
+        this.existencias = Integer.parseInt(articulo[4]);
+        this.bajoMinimo = Integer.parseInt(articulo[5]);
+        this.sobreMaximo = Integer.parseInt(articulo[6]);
+        this.fecUltEnt = articulo[7];
+        this.fecUltSal = articulo[8];
+    }
+
     public Articulo(int id, String desc, int prCost, int prVent, int existencias, int bajoMinimo, int sobreMaximo, String fecUltEnt, String fecUltSal) {
         this.id = id;
         this.desc = desc;

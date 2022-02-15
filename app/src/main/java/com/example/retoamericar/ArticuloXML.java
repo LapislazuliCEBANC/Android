@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class ArticuloXML<Objeto> {
+public class ArticuloXML {
 
     public ArticuloXML() {
     }
 
-    public ArrayList<Objeto> lector (File ficheroXML, String etiqueta, String[] etiquetas){
-        ArrayList<Objeto> lista = new ArrayList<>();
-        Objeto objeto;
+    public ArrayList<String[]> lector (File ficheroXML, String etiqueta, String[] etiquetas){
+        ArrayList<String[]> lista = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -29,13 +28,12 @@ public class ArticuloXML<Objeto> {
 
             NodeList articulos = document.getElementsByTagName(etiqueta);
             for (int i = 0; i < articulos.getLength(); i++) {
-                objeto = (Objeto) new Object();
                 Node arti = articulos.item(i);
                 if (arti.getNodeType() == Node.ELEMENT_NODE){
                     Element elemento = (Element) arti;
-                    String[] elementos = new String[etiquetas.length];
+                    String[] objetos = new String[etiquetas.length];
                     for (int j = 0; j < etiquetas.length; j++) {
-                        elementos[i] = elemento.getElementsByTagName(etiquetas[i]).item(0).getTextContent();
+                        objetos[i] = elemento.getElementsByTagName(etiquetas[i]).item(0).getTextContent();
                     }
                     /*
                     objeto.setId(Integer.parseInt(elemento.getElementsByTagName("ARTICULOID").item(0).getTextContent()));
@@ -48,11 +46,11 @@ public class ArticuloXML<Objeto> {
                     objeto.setFecUltEnt(elemento.getElementsByTagName("FEC_ULT_ENT").item(0).getTextContent());
                     objeto.setFecUltSal(elemento.getElementsByTagName("FEC_ULT_SAL").item(0).getTextContent());
                     */
-                    lista.add((Objeto) objeto);
+                    lista.add(objetos);
                 }
             }
         }catch (Exception e){
-            Log.e("info","Error al cargar el array: " + e);
+            Log.e("info","Error al leer el XML: " + e);
         }
 
         return lista;
