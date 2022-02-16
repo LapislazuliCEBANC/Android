@@ -178,7 +178,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     private boolean noIguales(SQLiteDatabase db) {
         String[] args = new String[]{id,String.valueOf(identificadores.get(pos))};
         Cursor cursor = db.rawQuery("Select idLinea, cantidad From Lineas Where idAlbaran=? and idArticulo=?",args);
-        if (cursor.moveToNext()){
+        if (cursor.moveToFirst()){
             int cant = Integer.parseInt(cantCrear.getText().toString());
             int existencias = cursorArticulos.getInt(4);
             String[] args2 = new String[]{cursor.getString(0)};

@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 exportarPartners();
                 exportarAlbaranes();
+                exportarLineas();
             }
         });
 
@@ -145,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
         listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/AlmacenDelegacion.xml"), "Articulo",
                 new String[]{"ARTICULOID","DESCRIPCION","PR_COST","PR_VENT","EXISTENCIAS","BAJO_MINIMO","SOBRE_MAXIMO","FEC_ULT_ENT","FEC_ULT_SAL"});
-        //Log.e("Pr", "Ha leido bien el array " + listaString.get(0)[0]);
         Articulo art;
         for (int i = 0; i < listaString.size(); i++) {
             art = new Articulo(listaString.get(i));
@@ -215,15 +215,15 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = db.rawQuery("Select * from Partners",null);
         if(cursor.moveToFirst()){
-            File fic = new File("/data/data/com.example.lapislazulireto/NuevosPartners.xml");
+            File ficheroGuardar = new File("/data/data/com.example.lapislazulireto/NuevosPartners.xml");
             try {
-                fic.createNewFile();
+                ficheroGuardar.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             controladorXML.escritor(new File("/data/data/com.example.lapislazulireto/Partners.xml"),
-                    fic,
+                    ficheroGuardar,
                     "Partners","Partner",
                     new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"},
                     cursor);
@@ -249,6 +249,27 @@ public class MainActivity extends AppCompatActivity {
                     "Albaranes","Albaran",
                     null, cursor);
             Toast.makeText(this,"Se a exportado con exito los Albaranes",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void exportarLineas(){
+        ControladorXML controladorXML = new ControladorXML();
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("Select * from Lineas",null);
+        if(cursor.moveToFirst()){
+            File fic = new File("/data/data/com.example.lapislazulireto/NuevasLineas.xml");
+            try {
+                fic.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            controladorXML.escritor(null, fic,
+                    "Lineas","Linea",
+                    null, cursor);
+            Toast.makeText(this,"Se a exportado con exito las lineas",Toast.LENGTH_SHORT).show();
         }
     }
 }

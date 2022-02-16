@@ -68,7 +68,6 @@ public class ControladorXML {
                 boolean nuevo = true;
                 //Por cada registro del cursor mirara todos lo del xml
                 for (int i = 0; i < creados.size(); i++) {
-
                     //Si el ID coincide terminara de mirar y pasara al siguiente registro
                     if (creados.get(i)[0].equals(cursor.getString(0))){
                         i=creados.size();
@@ -111,7 +110,6 @@ public class ControladorXML {
             document.setXmlVersion("1.0");
             //Por cada nuevo
             for (int i = 0; i < nuevos.size(); i++) {
-                a++;
                 Element raiz = document.createElement(etiqueta);
                 document.getDocumentElement().appendChild(raiz);
                 //por cada atributo del nuevo
@@ -123,16 +121,12 @@ public class ControladorXML {
             Result result = new StreamResult(ficheroFinal);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
-            Log.e("comp","He pasado unas "+ a);
             return true;
         }catch (Exception e){
             return false;
         }
 
     }
-
-
-
 
     private static void crearElemento(String dato, String valor, Element raiz, Document document) {
         Element elem = document.createElement(dato);
