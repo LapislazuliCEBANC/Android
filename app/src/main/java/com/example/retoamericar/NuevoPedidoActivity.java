@@ -190,7 +190,6 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             valores.put("existencias",existencias-cant);
             db.update("Articulos", valores, "idArticulo="+identificadores.get(pos),null);
             cantCrear.setText("");
-
             return false;
         }else {
             return true;

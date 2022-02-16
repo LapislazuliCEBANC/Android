@@ -64,13 +64,12 @@ public class ControladorXML {
             creados = lector(ficheroInicio, etiqueta, etiquetas);
             //Se encarga de que solo esten los nuevos
             do{
-
                 boolean nuevo = true;
                 //Por cada registro del cursor mirara todos lo del xml
                 for (int i = 0; i < creados.size(); i++) {
                     //Si el ID coincide terminara de mirar y pasara al siguiente registro
                     if (creados.get(i)[0].equals(cursor.getString(0))){
-                        i=creados.size();
+                        i = creados.size();
                         nuevo = false;
                     }
                 }
@@ -97,7 +96,6 @@ public class ControladorXML {
                 }
                 nuevos.add(registro);
             }while (cursor.moveToNext());
-
         }
 
         int a = 0;

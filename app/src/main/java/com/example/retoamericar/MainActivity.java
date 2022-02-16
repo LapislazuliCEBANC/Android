@@ -169,9 +169,6 @@ public class MainActivity extends AppCompatActivity {
             db.insert("Articulos", null, nuevo);
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(), "Aticulos cargados con exito", Toast.LENGTH_SHORT);
-        toast.show();
-
         db.close();
     }
 
@@ -182,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
         listaString = lector.lector(new File("/data/data/com.example.lapislazulireto/Partners.xml"),"Partner",
                 new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"});
-        //Log.e("Pr","Ha leido bien el array "+ listaString.get(0)[2]);
         Partner part;
         for (int i = 0; i < listaString.size(); i++) {
             part = new Partner(listaString.get(i));
@@ -200,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
             nuevo.put("poblacion", lista.get(i).getPoblacion());
             nuevo.put("cif", lista.get(i).getCif());
             nuevo.put("telefono", lista.get(i).getTelefono());
+            nuevo.put("email",lista.get(i).getEmail());
 
             db.insert("Partners",null,nuevo);
 
@@ -236,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
         SQLiteDatabase db = rsdb.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("Select idAlbaran, fechaAlbaran from Albaranes",null);
+        Cursor cursor = db.rawQuery("Select idAlbaran, idPartner, fechaAlbaran from Albaranes",null);
         if(cursor.moveToFirst()){
             File fic = new File("/data/data/com.example.lapislazulireto/NuevosAlbaranes.xml");
             try {
