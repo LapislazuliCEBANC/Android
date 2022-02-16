@@ -52,7 +52,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         cargarLista();
 
         foto = findViewById(R.id.imgvFoto);
-        final int[] galeria = {R.drawable.fordMustangMatchE, R.drawable.teslaModelY, R.drawable.gCMSierraAT42019, R.drawable.fiskherE, R.drawable.fordMustangGT, R.drawable.cadillacEldorado, R.drawable.chevroletBoltEV, R.drawable.chryslerVoyager, R.drawable.apolloIntensaEmozione2018, R.drawable.dodgeChargerSE, R.drawable.fordF150,R.drawable.fordGT};
+        final int[] galeria = {R.drawable.fordmustangmatche, R.drawable.teslamodely, R.drawable.gcmsierraat42019, R.drawable.fiskhere, R.drawable.fordmustanggt, R.drawable.cadillaceldorado, R.drawable.chevroletboltev, R.drawable.chryslervoyager, R.drawable.apollointensaemozione2018, R.drawable.dodgechargerse, R.drawable.fordf150,R.drawable.fordgt};
 
         spin=findViewById(R.id.spnNuevoPedidoSpinner);
         cargarSpinner();
