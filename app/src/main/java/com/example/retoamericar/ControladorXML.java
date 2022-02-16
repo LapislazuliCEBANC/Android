@@ -69,28 +69,36 @@ public class ControladorXML {
         creados = lector(ficheroInicio, etiqueta, etiquetas);
 
         cursor.moveToFirst();
-        //Se encarga de que solo esten los nuevos
-        do{
+        if (ficheroInicio != null){
+            //Se encarga de que solo esten los nuevos
+            do{
 
-            boolean nuevo = true;
-            //Por cada registro del cursor mirara todos lo del xml
-            for (int i = 0; i < creados.size(); i++) {
+                boolean nuevo = true;
+                //Por cada registro del cursor mirara todos lo del xml
+                for (int i = 0; i < creados.size(); i++) {
 
-                //Si el ID coincide terminara de mirar y pasara al siguiente registro
-                if (creados.get(i)[0].equals(cursor.getString(0))){
-                    i=creados.size();
-                    nuevo = false;
+                    //Si el ID coincide terminara de mirar y pasara al siguiente registro
+                    if (creados.get(i)[0].equals(cursor.getString(0))){
+                        i=creados.size();
+                        nuevo = false;
+                    }
                 }
-            }
-            //Si no coincide creamos un array de strings donde guardar toda la informacion de ese registro del cursor
-            if (nuevo){
-                String[] registro = new String[etiquetas.length];
-                for (int j = 0; j < registro.length; j++) {
-                    registro[j]=cursor.getString(j);
+                //Si no coincide creamos un array de strings donde guardar toda la informacion de ese registro del cursor
+                if (nuevo){
+                    String[] registro = new String[etiquetas.length];
+                    for (int j = 0; j < registro.length; j++) {
+                        registro[j]=cursor.getString(j);
+                    }
+                    nuevos.add(registro);
                 }
-                nuevos.add(registro);
+            }while (cursor.moveToNext());
+        }else{
+            etiquetas = new String[cursor.getColumnCount()];
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                etiquetas[i] = cursor.getString(i);
             }
-        }while (cursor.moveToNext());
+        }
+
 
         //Aqui empieza la escritura
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

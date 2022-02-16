@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 exportarPartners();
+                exportarAlbaranes();
             }
         });
 
@@ -230,4 +231,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void exportarAlbaranes(){
+        ControladorXML controladorXML = new ControladorXML();
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("Select idAlbaran, fechaAlbaran from Albaranes",null);
+        if(cursor.moveToFirst()){
+            File fic = new File("/data/data/com.example.lapislazulireto/NuevosAlbaranes.xml");
+            try {
+                fic.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            controladorXML.escritor(null, fic,
+                    "Albaranes","Albaran",
+                    null, cursor);
+            Toast.makeText(this,"Se a exportado con exito",Toast.LENGTH_SHORT).show();
+        }
+    }
 }
