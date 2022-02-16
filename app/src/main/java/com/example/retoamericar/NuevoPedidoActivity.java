@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -149,24 +150,51 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         SQLiteDatabase db = rsdb.getWritableDatabase();
 
         cursorArticulos.moveToPosition(pos);
-        int cant = Integer.valueOf(cantCrear.getText().toString());
+        int cant = Integer.parseInt(cantCrear.getText().toString());
         int existencias = cursorArticulos.getInt(4);
         if((existencias-cant)>=0){
-            ContentValues nuevo = new ContentValues();
-            nuevo.put("idAlbaran", id);
-            nuevo.put("idArticulo", identificadores.get(pos));
-            nuevo.put("cantidad", cant);
-            nuevo.put("precio", cursorArticulos.getInt(2));
+            if (noIguales(db)){
+                ContentValues nuevo = new ContentValues();
+                nuevo.put("idAlbaran", id);
+                nuevo.put("idArticulo", identificadores.get(pos));
+                nuevo.put("cantidad", cant);
+                nuevo.put("precio", cursorArticulos.getInt(2));
 
-            db.insert("Lineas", null, nuevo);
+                db.insert("Lineas", null, nuevo);
+
+                ContentValues valores = new ContentValues();
+                valores.put("existencias",existencias-cant);
+                db.update("Articulos", valores, "idArticulo="+identificadores.get(pos),null);
+                cantCrear.setText("");
+            }
+        } else{
+            Toast.makeText(this,"No se pueden añadir porque no qudan existencias",Toast.LENGTH_SHORT).show();
+        }
+        cargarSpinner();
+        cargarLista();
+        db.close();
+    }
+
+    private boolean noIguales(SQLiteDatabase db) {
+        String[] args = new String[]{id,String.valueOf(identificadores.get(pos))};
+        Cursor cursor = db.rawQuery("Select idLinea, cantidad From Lineas Where idAlbaran=? and idArticulo=?",args);
+        if (cursor.moveToNext()){
+            int cant = Integer.parseInt(cantCrear.getText().toString());
+            int existencias = cursorArticulos.getInt(4);
+            String[] args2 = new String[]{cursor.getString(0)};
+            ContentValues actualizado = new ContentValues();
+            actualizado.put("cantidad", (cant+cursor.getInt(1)) );
+            db.update("Lineas", actualizado, "idLinea=?", args2);
 
             ContentValues valores = new ContentValues();
             valores.put("existencias",existencias-cant);
             db.update("Articulos", valores, "idArticulo="+identificadores.get(pos),null);
             cantCrear.setText("");
+
+            return false;
+        }else {
+            return true;
         }
-        cargarSpinner();
-        cargarLista();
     }
 
     private void eliminarLinea(String id){
@@ -181,6 +209,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         if (c.moveToFirst()){
             db.delete("Lineas","idLinea=?",args);
             cargarLista();
+            idEliminar.setText("");
         }
     }
 }
