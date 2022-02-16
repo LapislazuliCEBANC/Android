@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     "Partners","Partner",
                     new String[]{"PARTNERID","COMERCIALESID","NOMBRE","DIRECCION","POBLACION","CIF","TELEFONO","EMAIL"},
                     cursor);
-            Toast.makeText(this,"Se a exportado con exito",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Se a exportado con exito los Partners",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
             controladorXML.escritor(null, fic,
                     "Albaranes","Albaran",
                     null, cursor);
-            Toast.makeText(this,"Se a exportado con exito",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Se a exportado con exito los Albaranes",Toast.LENGTH_SHORT).show();
         }
     }
 }

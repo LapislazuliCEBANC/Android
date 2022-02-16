@@ -66,10 +66,11 @@ public class ControladorXML {
     public boolean escritor(File ficheroInicio, File ficheroFinal, String contenedor, String etiqueta, String[] etiquetas, Cursor cursor){
         ArrayList<String[]> creados;
         ArrayList<String[]> nuevos = new ArrayList<>();
-        creados = lector(ficheroInicio, etiqueta, etiquetas);
+
 
         cursor.moveToFirst();
         if (ficheroInicio != null){
+            creados = lector(ficheroInicio, etiqueta, etiquetas);
             //Se encarga de que solo esten los nuevos
             do{
 
@@ -93,13 +94,23 @@ public class ControladorXML {
                 }
             }while (cursor.moveToNext());
         }else{
+            //Para ahorrarnos las etiquetas le decimpos que las etiquetas son el nombre de las columnas
             etiquetas = new String[cursor.getColumnCount()];
             for (int i = 0; i < cursor.getColumnCount(); i++) {
-                etiquetas[i] = cursor.getString(i);
+                etiquetas[i] = cursor.getColumnName(i);
             }
+            // Ya que a la hora de escribir utilizamos el array "nuevos" rellenamos el array con el cursor
+            do{
+                String[] registro = new String[etiquetas.length];
+                for (int i = 0; i < registro.length; i++) {
+                    registro[i] = cursor.getString(i);
+                }
+                nuevos.add(registro);
+            }while (cursor.moveToNext());
+
         }
 
-
+        int a = 0;
         //Aqui empieza la escritura
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
@@ -109,6 +120,7 @@ public class ControladorXML {
             document.setXmlVersion("1.0");
             //Por cada nuevo
             for (int i = 0; i < nuevos.size(); i++) {
+                a++;
                 Element raiz = document.createElement(etiqueta);
                 document.getDocumentElement().appendChild(raiz);
                 //por cada atributo del nuevo
@@ -120,6 +132,7 @@ public class ControladorXML {
             Result result = new StreamResult(ficheroFinal);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
+            Log.e("comp","He pasado unas "+ a);
             return true;
         }catch (Exception e){
             return false;
