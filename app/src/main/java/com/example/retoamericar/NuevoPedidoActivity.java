@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     EditText idEliminar;
     String id;
     Spinner spin;
+    ImageView foto;
     ArrayList<Integer> identificadores = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +51,16 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         lista=findViewById(R.id.rcvNuevoPedidoLista);
         cargarLista();
 
+        foto = findViewById(R.id.imgvFoto);
+        final int[] galeria = {R.drawable.FordMustangMatchE, R.drawable.TeslaModelY, R.drawable.GCMSierraAT42019, R.drawable.FiskherE, R.drawable.FordMustangGT, R.drawable.CadillacEldorado, R.drawable.ChevroletBoltEV, R.drawable.ChryslerVoyager, R.drawable.ApolloIntensaEmozione2018, R.drawable.DodgeChargerSE, R.drawable.FordF150,R.drawable.FordGT};
+
         spin=findViewById(R.id.spnNuevoPedidoSpinner);
         cargarSpinner();
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 pos = i;
+                foto.setImageResource(galeria[i]);
             }
 
             @Override
