@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
@@ -33,6 +34,7 @@ import java.util.Locale;
 public class NuevaTareaActivity extends AppCompatActivity {
     Spinner spin;
     ArrayList<Integer> identificadores = new ArrayList<Integer>();
+    int pos;
     TextView fecha;
     TextView hora;
     TextView descripcion;
@@ -85,7 +87,19 @@ public class NuevaTareaActivity extends AppCompatActivity {
         });
 
         spin = (Spinner) findViewById(R.id.spinner);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                pos = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         cargarSpinner();
+
 
 
         escojeHora = findViewById(R.id.escojeHora);
@@ -127,10 +141,9 @@ public class NuevaTareaActivity extends AppCompatActivity {
         SQLiteDatabase db = rsdb.getWritableDatabase();
 
         ContentValues nuevo = new ContentValues();
-        //idPartner es AutoIncremental: NO PONER
         nuevo.put("idComercial", ((GlobalData)this.getApplicationContext()).getIdComercial());
         nuevo.put("descripcion",descripcion.getText().toString());
-        nuevo.put("idPartner", "8");
+        nuevo.put("idPartner", identificadores.get(pos));
         nuevo.put("fecha",fecha.getText().toString());
         nuevo.put("hora",hora.getText().toString());
 

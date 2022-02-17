@@ -1,14 +1,18 @@
 package com.example.retoamericar;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.DatePicker;
@@ -37,7 +41,7 @@ public class AgendaActivity extends AppCompatActivity {
         int dayOfMonth = calendario.getDayOfMonth();
         int monthOfYear = calendario.getMonth();
         int year = calendario.getYear();
-
+        cargar();
         fecha = dayOfMonth +"/"+monthOfYear+ "/"+year;
         calendario.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
@@ -55,12 +59,12 @@ public class AgendaActivity extends AppCompatActivity {
             }
         });
 
-//        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                dialogo(identificadores.get(i));
-//            }
-//        });
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dialogo(identificadores.get(i));
+            }
+        });
 
     }
 
@@ -75,58 +79,45 @@ public class AgendaActivity extends AppCompatActivity {
         SQLiteDatabase db = rsdb.getReadableDatabase();
 
         String id = String.valueOf(((GlobalData) this.getApplication()).getIdComercial());
-        //Select campos, "as _id" obligatorio para el SimpleCursorAdapter
-        String[] campos = new String[]{"idAgenda as _id","idPartner", "descripcion", "fecha","hora"};
-        //Where campos
         String[] args = new String[]{id};
 
-        Cursor c = db.query("Agenda", campos, "idComercial=?", args, null, null, null);
-        if (c.moveToFirst()){
-            SimpleCursorAdapter sca = new SimpleCursorAdapter(this, R.layout.agenda, c,
+        Cursor cursor = db.rawQuery("Select Partners.nombre as _id , Agenda.idPartner, Agenda.descripcion, fecha, hora, idAgenda " +
+                                        "From Agenda, Partners " +
+                                        "Where Agenda.idComercial=? and Agenda.idPartner = Partners.idPartner",args);
+        if (cursor.moveToFirst()){
+            SimpleCursorAdapter sca = new SimpleCursorAdapter(this, R.layout.agenda, cursor,
                     new String[]{"_id", "descripcion", "fecha","hora", "idPartner"},
-                    new int[]{R.id.idAgenda, R.id.descripcion, R.id.fecha, R.id.hora, R.id.partnerId},
+                    new int[]{R.id.txvAgendaNombrePartner, R.id.txvAgendaDescripcion, R.id.txvAgendaFecha, R.id.txvAgendaHora},
                     CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             lst.setAdapter(sca);
             do {
-                identificadores.add(c.getInt(0));
-            }while (c.moveToNext());
+                identificadores.add(cursor.getInt(5));
+            }while (cursor.moveToNext());
         }
         db.close();
     }
-//
-//    private void dialogo(int id) {
-//        String[] opc = {"Modificar","Eliminar","Cancelar"};
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Selecciona una opcion");
-//        builder.setItems(opc, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                esperador(id, i);
-//            }
-//        });
-//        builder.show();
-//    }
-//
-//    private void esperador(int id, int respuesta){
-//        if (respuesta==0){
-//            modificar(id);
-//        }else if (respuesta==1){
-//            eliminar(id);
-//        }
-//    }
-//
-//    private void eliminar(int id){
-//        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
-//        SQLiteDatabase db = rsdb.getWritableDatabase();
-//
-//        String[] args = {String.valueOf(id)};
-//        db.delete("Agenda","idAgenda=?",args);
-//        cargar();
-//    }
-//
-//    private void modificar(int id){
-//        Intent i = new Intent(AgendaActivity.this, ModificarTarea.class);
-//        i.putExtra("id", String.valueOf(id));
-//        startActivity(i);
-//    }
+
+    private void dialogo(int id) {
+        String[] opc = {"Eliminar","Cancelar"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecciona una opcion");
+        builder.setItems(opc, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i==0){
+                    eliminar(id);
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void eliminar(int id){
+        retoSQLiteHelper rsdb = new retoSQLiteHelper(this, "reto", null, 1);
+        SQLiteDatabase db = rsdb.getWritableDatabase();
+
+        String[] args = {String.valueOf(id)};
+        db.delete("Agenda","idAgenda=?",args);
+        cargar();
+    }
 }
