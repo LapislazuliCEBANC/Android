@@ -40,6 +40,10 @@
     <string name="modificar">Modificar</string>
     <string name="importar">IMPORTAR ARCHIVOS</string>
     <string name="exportar">EXPORTAR ARCHIVOS</string>
-
+    <string name="descripcion">Descripcion</string>
+    <string name="fecha">Fecha</string>
+    <string name="partner2">Partner</string>
+    <string name="nueva_tarea">Nueva Tarea</string>
+    <string name="seleccionar">Seleccionar</string>
 
 </resources>

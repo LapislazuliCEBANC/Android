@@ -26,6 +26,9 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
                 " CONSTRAINT pkComerciales"+
                 " PRIMARY KEY (idComercial)"+
                 ")";
+
+
+
         String crearPartners = "CREATE TABLE Partners(" +
                 " idPartner INTEGER," +
                 " idComercial INTEGER," +
@@ -40,6 +43,22 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
                 " CONSTRAINT fkPartnersComerciales" +
                 " FOREIGN KEY (idComercial)" +
                 " REFERENCES Comerciales(idComercial)" +
+                ")";
+        String crearAgenda = "CREATE TABLE Agenda(" +
+                " idAgenda INTEGER," +
+                " idComercial INTEGER," +
+                " idPartner INTEGER," +
+                " descripcion TEXT," +
+                " fecha TEXT," +
+                " hora TEXT," +
+                " CONSTRAINT pkAgenda" +
+                " PRIMARY KEY (idAgenda)," +
+                " CONSTRAINT fkAgendaComercial" +
+                " FOREIGN KEY (idComercial)" +
+                " REFERENCES Comerciales(idComercial) ON DELETE CASCADE," +
+                " CONSTRAINT fkAgendaPartner" +
+                " FOREIGN KEY (idPartner)" +
+                " REFERENCES Partners(idPartner) ON DELETE CASCADE" +
                 ")";
         String crearAlbaranes = "CREATE TABLE Albaranes(" +
                 " idAlbaran INTEGER," +
@@ -84,6 +103,7 @@ public class retoSQLiteHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(crearComerciales);
         sqLiteDatabase.execSQL(crearPartners);
+        sqLiteDatabase.execSQL(crearAgenda);
         sqLiteDatabase.execSQL(crearAlbaranes);
         sqLiteDatabase.execSQL(crearArticulos);
         sqLiteDatabase.execSQL(crearLineas);

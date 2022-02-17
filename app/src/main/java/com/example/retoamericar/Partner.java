@@ -16,6 +16,11 @@ public class Partner {
 
     }
 
+    public Partner(Integer id, String nombre) {
+        this.idPartner = id;
+        this.nombre = nombre;
+    }
+
     public Partner(String[] partner){
         this.idPartner = Integer.parseInt(partner[0]);
         this.idComercial = Integer.parseInt(partner[1]);

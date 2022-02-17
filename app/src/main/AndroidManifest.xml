@@ -20,6 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetoAmericar">
         <activity
+            android:name=".ModificarTarea"
+            android:exported="false" />
+        <activity
+            android:name=".NuevaTareaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgendaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ModificarPartner"
             android:exported="false" />
         <activity

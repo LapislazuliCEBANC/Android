@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: Hacer la agenda
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(MainActivity.this, AgendaActivity.class);
                 startActivity(intent);
             }
         });
@@ -110,9 +109,31 @@ public class MainActivity extends AppCompatActivity {
         envio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: a saber que vamos a hacer con esto
-                //Intent intent = new Intent(MainActivity.this, Gmail_attachment.class);
-                //startActivity(intent);
+                String enviarcorreo = "lapislazuli@americar.com";
+                String enviarasunto = "Partners y pedidos del día";
+                String enviarmensaje = "xml de Partners y pedidos nuevos";
+
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { enviarcorreo });
+                intent.putExtra(Intent.EXTRA_SUBJECT, enviarasunto);
+                intent.putExtra(Intent.EXTRA_TEXT, enviarmensaje);
+
+                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("/data/data/com.example.retoamericar/files/factura.xml"));
+                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("/data/data/com.example.retoamericar/files/partners.xml"));
+
+                // Establezco el tipo de Intent
+                intent.setType("message/rfc822");
+
+
+
+
+                // Lanzo el selector de cliente de Correo
+                startActivity(
+                        Intent
+                                .createChooser(intent,
+                                        "Elige un cliente de Correo:"));
             }
         });
 
